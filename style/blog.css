@@ -1,0 +1,256 @@
+body {
+    background-color: #cecece;
+}
+
+.blog .form-blog .form-container {
+    width: 600px;
+    margin: 50px auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.blog .form-blog .form-container h1 {
+    text-align: center;
+    text-shadow: 0 10px 15px black;
+}
+
+.blog .form-container label {
+    font-weight: 700;
+}
+
+.blog .form-container .input-date {
+    display: flex;
+}
+
+.blog .form-container .start-date {
+    flex: 50%;
+    margin-right: 20px;
+}
+
+.blog .form-container .end-date {
+    flex: 50%;
+}
+
+.blog .form-container .sec-input input,
+textarea {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px gray;
+    resize: none;
+}
+
+.form-blog .form-container .input-blog-check label {
+    margin-bottom: 10px;
+}
+
+.form-blog .form-container .input-blog-check .input-blog-check-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+}
+
+.blog .form-container .input-group-image {
+    margin-top: 5px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 5px 5px gray;
+}
+
+.blog .form-container .input-group-image img {
+    width: 30px;
+}
+
+.blog .form-container .input-group-image label {
+    height: 40px;
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+}
+
+/*  */
+.blog .form-container .input-group-image label p {
+    background: #b8b8b9;
+    border: 1px solid #b8b8b9;
+    border-radius: 5px;
+    border-width: 10px;
+    text-align: center;
+    justify-items: center;
+    color: gray;
+}
+
+.blog .form-container .input-group button {
+    margin-top: 50px;
+    border: 1px solid black;
+    background-color: black;
+    float: right;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 7px 30px;
+    border-radius: 25px;
+    color: white;
+}
+
+/* card content styling */
+
+.blog-heading {
+    text-align: center;
+    background-color: white;
+    padding: 50px 0 0 0;
+}
+
+.blog-heading h1 {
+    font-weight: 700;
+    text-shadow: 0 10px 20px grey;
+}
+
+.blog-list {
+    background-color: white;
+    padding: 50px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+}
+
+.blog-list .blog-list-content {
+    width: 300px;
+    align-content: center;
+    border-radius: 10px;
+    padding: 9px;
+    box-shadow: 0 10px 20px grey;
+    margin-bottom: 50px;
+}
+
+.blog-list .blog-list-content .list-image {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.blog-list .blog-list-content .list-image img {
+    width: 290px;
+    height: 250px;
+    border-radius: 10px;
+}
+
+.blog-list-content .blog-list-content-title {
+    font-size: large;
+    text-align: left;
+}
+
+.blog-list-content .blog-list-content-title a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.blog-list-content .blog-project-content p {
+    text-align: justify;
+}
+
+.blog-list-content .blog-list-detail {
+    margin-top: 5px;
+    font-weight: 200;
+    font-size: 12px;
+    text-align: left;
+}
+
+.blog-list-content .mini-icon {
+    display: flex;
+    font-size: 25px;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.blog-list-content .btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.blog-list-content .btn-edit {
+    flex: 50%;
+    padding: 6px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.blog-list-content .btn-delete {
+    flex: 50%;
+    padding: 6px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+}
+
+/* blog detail styling*/
+
+.detail-blog h1 {
+    text-align: center;
+    text-shadow: 0 0 15px black;
+    margin-top: 50px;
+}
+
+.detail-blog-container {
+    padding: 50px;
+}
+
+.detail-blog-container .detail-content-top {
+    display: flex;
+}
+
+.detail-blog-container .detail-content-top img {
+    margin-right: 50px;
+    width: 60%;
+    height: 500px;
+    object-fit: cover;
+    box-shadow: 0 0 20px black;
+}
+
+.detail-blog-container .detail-content-top .sec-detail-top .detail-calendar {
+    display: flex;
+    align-items: center;
+    margin-top: -15px;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.detail-blog-container .detail-content-top .sec-detail-top .detail-clock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.detail-blog-container .detail-content-top .sec-bottom-grouping {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.detail-blog-container .detail-content-top .sec-bottom-grouping div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 20px;
+    margin-top: -15px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.detail-blog-container .detail-content-bottom {
+    margin-top: 50px;
+    text-align: justify;
+}

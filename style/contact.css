@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #cecece;
+}
+
+.container {
+    width: 500px;
+}
+
+form {
+    width: 40%;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+form div {
+    margin-top: 20px;
+}
+
+form div h1 {
+    text-align: center;
+    justify-content: center;
+    font-weight: 600;
+    text-shadow: 0 0 15px black;
+}
+
+form div label {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+form div input,
+select,
+textarea,
+button {
+    box-shadow: 0 10px 20px #adacac;
+}
+
+input,
+select,
+textarea {
+    background-color: whitesmoke;
+    border: 1px solid white;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    resize: none;
+}
+
+button {
+    position: absolute;
+    right: 30%;
+    font-weight: 700;
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+    padding: 6px 25px;
+    border-radius: 15px;
+    place-items: right;
+}
+
+/* navbar styling */
+
+nav {
+    background-color: #ececee;
+    display: flex;
+    align-items: center;
+    height: 10vh;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+nav ul li a:hover {
+    color: orangered;
+}
+
+.nav-left {
+    flex: 50%;
+}
+
+.nav-left img {
+    width: 50px;
+}
+
+.nav-right {
+    flex: 50%;
+    text-align: end;
+    margin-right: 30px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    background-color: black;
+    padding: 6px 20px;
+    color: white;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.nav-right a:hover {
+    background-color: orangered;
+    color: white;
+}

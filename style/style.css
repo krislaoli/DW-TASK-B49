@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* navbar styling */
+
+nav {
+    background-color: #ececee;
+    display: flex;
+    align-items: center;
+    height: 10vh;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+nav .nav-left a.active {
+    color: orangered;
+}
+
+nav ul li a:hover {
+    color: orangered;
+}
+
+.nav-left {
+    flex: 50%;
+}
+
+.nav-left img {
+    width: 50px;
+}
+
+.nav-right {
+    flex: 50%;
+    text-align: end;
+    margin-right: 30px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    background-color: black;
+    padding: 6px 20px;
+    color: white;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.nav-right a:hover {
+    background-color: orangered;
+    color: white;
+}
+
+/* content styling */
+.container {
+    width: 150vh;
+    border: 1px solid #cecece;
+    margin: 50px auto;
+    padding: 30px 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #cecece;
+    text-align: justify;
+    display: flex;
+}
+
+.container li a {
+    width: 100px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+}
+
+.container .shortcut {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    margin-top: 50px;
+}
+
+.container .shortcut .s-left {
+    flex: 25%;
+}
+
+.container .shortcut .s-left a {
+    text-decoration: none;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+.container .shortcut .s-right {
+    flex: 75%;
+}
+
+.container .shortcut .s-right a {
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: black;
+    font-weight: 600;
+}
+
+.container .social-media {
+    padding-top: 30px;
+    margin-top: 30px;
+}
+
+.container .social-media a {
+    color: black;
+}
+
+.container .social-media a {
+    margin-right: 15px;
+}
+
+.container .image-profile {
+    width: 300px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #cecece;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.container .content-left {
+    flex: 60%;
+    margin: 20px 50px 0 0;
+    padding-left: 50px;
+}
+
+.container .content-left p {
+    margin-top: 30px;
+}
+
+.container .content-left h2 {
+    text-align: left;
+}
+
+.container .content-right {
+    flex: 40%;
+    align-items: center;
+    justify-items: center;
+}
+
+.container .content-right .image-profile img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}

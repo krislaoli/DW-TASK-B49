@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="style/contact.css" />
+  </head>
+  <body>
+    <!-- navbar content -->
+    <nav id="navigation">
+      <div class="nav-left">
+        <ul>
+          <li><img src="img/uchiha.PNG" alt="Logo" /></li>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="blog.html">My Project</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <a href="contact.html">Contact Me</a>
+      </div>
+    </nav>
+
+    <!-- form content -->
+    <form>
+      <div>
+        <h1>GET IN TOUCH</h1>
+      </div>
+      <div>
+        <label for="input-name">Name</label>
+        <input id="input-name" type="text" required />
+      </div>
+      <div>
+        <label for="input-email">Email</label>
+        <input id="input-email" type="email" required />
+      </div>
+      <div>
+        <label for="input-number">Phone</label>
+        <input id="input-number" type="number" required />
+      </div>
+      <div>
+        <label for="input-subject">Subject</label>
+        <select id="input-subject">
+          <option value="" hidden>Subject</option>
+          <option>Frontend</option>
+          <option>Backend</option>
+          <option>Fullstack</option>
+        </select>
+      </div>
+      <div>
+        <label for="input-massage">Your Massages</label
+        ><textarea name="" id="input-massage" cols="30" rows="10"></textarea>
+      </div>
+
+      <div>
+        <button type="button" onclick="submitData()">Submit</button>
+      </div>
+    </form>
+
+    <script src="js/contact.js"></script>
+  </body>
+</html>
