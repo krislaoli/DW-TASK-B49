@@ -76,8 +76,8 @@ nav ul li a:hover {
 .container {
     width: 150vh;
     border: 2px solid #6b6b6b;
-
-    margin: 50px auto;
+    max-width: 80%;
+    margin: 20px auto;
     padding: 30px 50px;
     border-radius: 10px;
     box-shadow: 0 0 20px #000000;
@@ -87,7 +87,7 @@ nav ul li a:hover {
 
 .container li a {
     width: 100px;
-    height: 30px;
+    height: 300px;
     background-color: black;
     color: rgb(249, 249, 249);
     border-radius: 15px;
@@ -109,7 +109,7 @@ nav ul li a:hover {
     align-items: center;
     background-color: black;
     color: white;
-    padding: 5px 20px;
+    padding: 5px 15px;
     border-radius: 10px;
 }
 
@@ -127,8 +127,9 @@ nav ul li a:hover {
 }
 
 .container .social-media {
-    padding-top: 30px;
-    margin-top: 30px;
+    padding-top: 20px;
+    margin-top: 10px;
+    display: flex;
 }
 
 .container .social-media a {
@@ -140,8 +141,8 @@ nav ul li a:hover {
 }
 
 .container .image-profile {
-    width: 300px;
-    margin: 40px auto;
+    width: 200px;
+    margin: 1px auto;
     border-radius: 10px;
     box-shadow: 0 0 15px #232323;
     text-align: center;
@@ -150,7 +151,7 @@ nav ul li a:hover {
 
 .container .content-left {
     flex: 60%;
-    margin: 20px 50px 0 0;
+    margin: 20px 25px 0 0;
     padding-left: 50px;
 }
 

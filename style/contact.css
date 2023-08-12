@@ -17,13 +17,13 @@ body {
 form {
     width: 40%;
     margin: 30px auto;
-    padding: 25px;
+    padding: 0px;
     border-radius: 10px;
     margin-bottom: 50px;
 }
 
 form div {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 form div h1 {
