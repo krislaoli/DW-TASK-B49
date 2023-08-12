@@ -5,6 +5,7 @@
 }
 
 body {
+    background-color: #e2dede;
     margin: 0;
     padding: 0;
 }
@@ -12,7 +13,7 @@ body {
 /* navbar styling */
 
 nav {
-    background-color: #ececee;
+    background-color: #8c8c8c;
     display: flex;
     align-items: center;
     height: 10vh;
@@ -36,7 +37,7 @@ nav ul li a {
 }
 
 nav .nav-left a.active {
-    color: orangered;
+    color: rgb(0, 0, 0);
 }
 
 nav ul li a:hover {
@@ -74,11 +75,12 @@ nav ul li a:hover {
 /* content styling */
 .container {
     width: 150vh;
-    border: 1px solid #cecece;
+    border: 2px solid #6b6b6b;
+
     margin: 50px auto;
     padding: 30px 50px;
     border-radius: 10px;
-    box-shadow: 0 0 20px #cecece;
+    box-shadow: 0 0 20px #000000;
     text-align: justify;
     display: flex;
 }
@@ -87,7 +89,7 @@ nav ul li a:hover {
     width: 100px;
     height: 30px;
     background-color: black;
-    color: white;
+    color: rgb(249, 249, 249);
     border-radius: 15px;
 }
 
@@ -134,14 +136,14 @@ nav ul li a:hover {
 }
 
 .container .social-media a {
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .container .image-profile {
     width: 300px;
     margin: 40px auto;
     border-radius: 10px;
-    box-shadow: 0 0 15px #cecece;
+    box-shadow: 0 0 15px #232323;
     text-align: center;
     padding-bottom: 10px;
 }
@@ -153,7 +155,7 @@ nav ul li a:hover {
 }
 
 .container .content-left p {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .container .content-left h2 {
@@ -161,7 +163,7 @@ nav ul li a:hover {
 }
 
 .container .content-right {
-    flex: 40%;
+    flex: 10%;
     align-items: center;
     justify-items: center;
 }

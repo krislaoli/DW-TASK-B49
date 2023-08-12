@@ -1,5 +1,5 @@
 body {
-    background-color: #cecece;
+    background-color: #e2dede;
 }
 
 .blog .form-blog .form-container {
@@ -12,7 +12,7 @@ body {
 
 .blog .form-blog .form-container h1 {
     text-align: center;
-    text-shadow: 0 10px 15px black;
+    text-shadow: 0px black;
 }
 
 .blog .form-container label {
@@ -78,7 +78,7 @@ textarea {
     justify-content: space-between;
 }
 
-/*  */
+/* ini adalah upload untuk klik attach file */
 .blog .form-container .input-group-image label p {
     background: #b8b8b9;
     border: 1px solid #b8b8b9;
@@ -89,6 +89,7 @@ textarea {
     color: gray;
 }
 
+/* tombol button */
 .blog .form-container .input-group button {
     margin-top: 50px;
     border: 1px solid black;
@@ -191,66 +192,4 @@ textarea {
     color: white;
     background-color: black;
     border-radius: 10px;
-}
-
-/* blog detail styling*/
-
-.detail-blog h1 {
-    text-align: center;
-    text-shadow: 0 0 15px black;
-    margin-top: 50px;
-}
-
-.detail-blog-container {
-    padding: 50px;
-}
-
-.detail-blog-container .detail-content-top {
-    display: flex;
-}
-
-.detail-blog-container .detail-content-top img {
-    margin-right: 50px;
-    width: 60%;
-    height: 500px;
-    object-fit: cover;
-    box-shadow: 0 0 20px black;
-}
-
-.detail-blog-container .detail-content-top .sec-detail-top .detail-calendar {
-    display: flex;
-    align-items: center;
-    margin-top: -15px;
-    gap: 10px;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.detail-blog-container .detail-content-top .sec-detail-top .detail-clock {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.detail-blog-container .detail-content-top .sec-bottom-grouping {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-}
-
-.detail-blog-container .detail-content-top .sec-bottom-grouping div {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-right: 20px;
-    margin-top: -15px;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.detail-blog-container .detail-content-bottom {
-    margin-top: 50px;
-    text-align: justify;
 }

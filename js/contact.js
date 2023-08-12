@@ -17,8 +17,10 @@ function submitData() {
     return alert("Massage Harus Diisi!");
   }
 
+  let emailReceiver = "laolikristian1305@gmail.com";
+
   let a = document.createElement("a");
-  a.href = `mailto:${email}?subject=${subject}&body=Halo perkenalkan nama saya ${name}, ${massage}. jika ada masalah terlebih silahkan hubungi nomor ini ${phone}, TerimaKasih`;
+  a.href = `mailto:${emailReceiver}?subject=${subject}&body=Halo perkenalkan nama saya ${name}, ${massage}. jika ada masalah terlebih dahulu silahkan hubungi nomor ini ${phone}, TerimaKasih`;
   a.click();
 
   console.log(name);
