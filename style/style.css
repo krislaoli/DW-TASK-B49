@@ -13,7 +13,7 @@ body {
 /* navbar styling */
 
 nav {
-    background-color: #8c8c8c;
+    background-color: #5b5b5b;
     display: flex;
     align-items: center;
     height: 10vh;
@@ -114,7 +114,7 @@ nav ul li a:hover {
 }
 
 .container .shortcut .s-right {
-    flex: 75%;
+    flex: 160%;
 }
 
 .container .shortcut .s-right a {

@@ -25,13 +25,6 @@ function addBlog(event) {
     let daysInMonth = 30;
     let monthInYears = 12;
 
-    // let distanceDay = Math.floor(
-    //   distance / (milisecond * secondInHours * hoursInDays)
-    // ); // 1/86400000
-    // let distanceHours = Math.floor(distance / (milisecond * 60 * 60)); // 1/3600000
-    // let distanceMinutes = Math.floor(distance / (milisecond * 60)); // 1/60000
-    // let distanceSeconds = Math.floor(distance / milisecond); // 1/1000
-
     const duration = date2 - date1; // selisih antara tanggal akhir dan awal dalam milisecond
 
     // variable penyimpan untuk mengatur satuan taggal
@@ -46,12 +39,6 @@ function addBlog(event) {
       duration / (monthInYears * daysInMonth * 24 * 60 * 60 * 1000)
     ); // mili to years
 
-    // console.log(daysDiff + "hari");
-    // console.log(weekDiff + "minggu");
-    // console.log(monthDiff + "bulan");
-    // console.log(yearsDiff + "tahun");
-
-    // kondisi selisih saat tanggal dipilih
     if (yearsDiff > 0) {
       return `${yearsDiff}` + " Tahun";
     } else if (monthDiff > 0) {
@@ -65,14 +52,10 @@ function addBlog(event) {
 
   let differentTime = getDifferentTime();
 
-  // deklarasi icon
-
   let ReactIcon = '<i class="fa-brands fa-react"></i>';
   let JavascriptIcon = '<i class="fa-brands fa-js"></i>';
   let NodeIcon = '<i class="fa-brands fa-node-js"></i>';
   let javaIcon = '<i class="fa-brands fa-java"></i>';
-
-  // deklarasi pada icon kepada checkbox
 
   let checkReact = document.getElementById("input-check-box-react").checked
     ? ReactIcon
@@ -87,7 +70,6 @@ function addBlog(event) {
     ? javaIcon
     : "";
 
-  // memunculkan url gambar
   image = URL.createObjectURL(image[0]);
   console.log(image);
 

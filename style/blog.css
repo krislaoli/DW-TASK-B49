@@ -91,7 +91,7 @@ textarea {
 
 /* tombol button */
 .blog .form-container .input-group button {
-    margin-top: 50px;
+    margin-top: 15px;
     border: 1px solid black;
     background-color: black;
     float: right;
@@ -121,7 +121,7 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 60px;
+    gap: 100px;
 }
 
 .blog-list .blog-list-content {
