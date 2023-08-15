@@ -4,7 +4,7 @@ body {
 
 .blog .form-blog .form-container {
     width: 600px;
-    margin: 2px auto;
+    margin: 50px auto;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -12,7 +12,7 @@ body {
 
 .blog .form-blog .form-container h1 {
     text-align: center;
-    text-shadow: 0px black;
+    text-shadow: 0 10px 15px black;
 }
 
 .blog .form-container label {
@@ -192,4 +192,14 @@ textarea {
     color: white;
     background-color: black;
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 9000px) {
+    .blog .blog-list .blog-list-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media only screen {}
+
 }
