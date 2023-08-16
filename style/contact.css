@@ -70,18 +70,6 @@ textarea {
     resize: none;
 }
 
-/* button {
-  position: absolute;
-  right: 30%;
-  font-weight: 700;
-  background-color: black;
-  color: white;
-  margin-top: 10px;
-  padding: 6px 25px;
-  border-radius: 15px;
-  place-items: right;
-} */
-
 /* navbar styling */
 
 nav {
@@ -158,11 +146,11 @@ nav ul li a:hover {
     display: flex;
     font-size: 25px;
     text-decoration: none;
-    background-color: #cecece;
+    background-color: orangered;
     padding: 20px;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: black;
     border: 1px solid white;
 }
 
