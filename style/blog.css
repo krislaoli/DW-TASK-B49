@@ -3,7 +3,7 @@ body {
 }
 
 .blog .form-blog .form-container {
-    width: 600px;
+    width: auto;
     margin: 50px auto;
     align-items: center;
     justify-content: center;
@@ -200,6 +200,12 @@ textarea {
         flex-direction: column;
     }
 
-    @media only screen {}
+}
+
+@media only screen and (max-width: 768px) {
+    .blog .blog-list .blog-list-item {
+        width: 40%;
+        display: none;
+    }
 
 }

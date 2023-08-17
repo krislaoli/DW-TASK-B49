@@ -32,13 +32,13 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-weight: 600;
     font-size: 20px;
 }
 
 nav .nav-left a.active {
-    color: rgb(255, 255, 255);
+    color: black;
 }
 
 nav ul li a:hover {
@@ -191,7 +191,7 @@ nav ul li a:hover {
 }
 
 .hamburger-nav-container {
-    display: grid;
+    display: none;
     text-decoration: none;
     object-fit: none;
 }
