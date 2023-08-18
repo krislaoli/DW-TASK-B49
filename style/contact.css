@@ -179,7 +179,7 @@ nav ul li a:hover {
 /* ! media queries responsive*/
 
 /* tablet */
-@media (max-width: 900px) {
+@media only screen and (max-width: 900px) {
     form {
         width: 60%;
         margin: 10px auto;
@@ -198,12 +198,10 @@ nav ul li a:hover {
 }
 
 /* mobile */
-@media (max-width: 450px) {
-    form {
-        width: 50%;
-        margin: 5px auto;
-        padding: 5px;
-        border-radius: 10px;
-        margin-bottom: 50px;
+@media only screen and (max-width: 550px) {
+    .container .containe {
+        width: 768;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
