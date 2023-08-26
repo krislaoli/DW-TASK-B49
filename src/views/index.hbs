@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,18 +23,24 @@
 
     <nav class="navbar navbar-expand-lg bg-body-secondary">
       <div class="container">
-        <a class="navbar-brand" href="#"
-          ><img src="assets/image/uchiha.PNG" alt="#" width="50" height="45" />
+        <a class="navbar-brand" href="#"><img
+            style="max-width: 200px"
+            src="/images/uchiha.PNG"
+            id=""
+            alt="#"
+            width="50"
+            height="45"
+          />
         </a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+              <a class="nav-link" aria-current="page" href="/index">Home</a>
             </li>
 
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="form-add-project.html">
+              <a class="nav-link active" href="/blog">
                 Add Project
               </a>
             </li>
@@ -45,9 +50,8 @@
             <a
               class="btn btn-outline-danger fw-bold"
               type="submit"
-              href="form-contact.html"
-              >Contact Me</a
-            >
+              href="/contact"
+            >Contact Me</a>
           </div>
         </div>
       </div>
@@ -77,13 +81,16 @@
               class="card-content-list d-flex flex-sm-row align-items-center mt-5"
             >
               <button class="btn btn-dark rounded-pill ps-4 pe-4 me-4">
-                <a class="text-light fs-6 fw-bolder" href="form-contact.html">
+                <a class="text-light fs-6 fw-bolder" href="/contact">
                   Contact
                 </a>
               </button>
 
-              <a class="text-dark fs-6 fw-bolder" href="#" download
-                >Download CV
+              <a
+                class="text-dark fs-6 fw-bolder"
+                href="CV.pdf"
+                download
+              >Download CV
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -102,18 +109,18 @@
             </div>
 
             <div class="social-media mt-5 d-flex gap-4 fs-2">
-              <a href="https://www.linkedin.com/in/kris05/"
-                ><i class="icon-sosmed fa-brands fa-linkedin text-dark"></i
-              ></a>
-              <a href="https://www.instagram.com/kris.laoli/"
-                ><i class="icon-sosmed fa-brands fa-instagram text-dark"></i
-              ></a>
-              <a href="https://www.facebook.com/crislaoli14"
-                ><i class="icon-sosmed fa-brands fa-facebook text-dark"></i
-              ></a>
-              <a href="https://twitter.com/Krislaoli_"
-                ><i class="icon-sosmed fa-brands fa-twitter text-dark"></i
-              ></a>
+              <a href="https://www.linkedin.com/in/kris05/"><i
+                  class="icon-sosmed fa-brands fa-linkedin text-dark"
+                ></i></a>
+              <a href="https://www.instagram.com/kris.laoli/"><i
+                  class="icon-sosmed fa-brands fa-instagram text-dark"
+                ></i></a>
+              <a href="https://www.facebook.com/crislaoli14"><i
+                  class="icon-sosmed fa-brands fa-facebook text-dark"
+                ></i></a>
+              <a href="https://twitter.com/Krislaoli_"><i
+                  class="icon-sosmed fa-brands fa-twitter text-dark"
+                ></i></a>
             </div>
           </div>
 
@@ -122,7 +129,7 @@
           >
             <img
               class="card-img-top rounded-top-3"
-              src="assets/image/kris.JPG"
+              src="/images/kris.JPG"
               alt="card-photo"
             />
             <div class="card-body rounded-3">
@@ -139,19 +146,25 @@
     <!-- my project content -->
 
     <div class="my-project-container">
-      <h2 class="text-center fw-bold pb-5 pt-5">My Project</h2>
+      <h2 class="text-center fw-bold pb-5 pt-5">My Project
+        <a
+          class="btn mb-5 mt-5 fw-bold btn-warning c text-bold"
+          href="/blog-detail/2000"
+        >Update </a></h2>
+
       <div
         class="row card-content gap-4 p-5 d-flex align-items-center justify-content-center"
       >
+
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
           <div class="card card-my-project">
             <div class="card-body rounded-3 shadow">
               <img
                 class="card-img-top rounded-3"
-                src="assets/image/a.jpg"
+                src="/images/a.jpg"
                 alt="test"
               />
-              <a href="#" class="fw-bolder fs-5">SpongeBob</a>
+              <a href="/blog" class="fw-bolder fs-5">SpongeBob</a>
               <p>durasi: 3 bulan</p>
               <p>SpongeBob adalah spons laut eksentrik</p>
               <div class="d-flex gap-3 mb-3">
@@ -163,9 +176,14 @@
 
               <div
                 class="btn-group gap-3 d-flex flex-row justify-content-center p-2"
-              >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
+              ><a
+                  class="col btn btn-danger pt-1 pb-1 btn-submit"
+                  href="/blog"
+                >Submit</a>
+                <a
+                  class="col btn btn-warning pt-1 pb-1 btn-delete"
+                  href="/blog"
+                >Delete</a>
               </div>
             </div>
           </div>
@@ -176,7 +194,7 @@
             <div class="card-body rounded-3 shadow">
               <img
                 class="card-img-top rounded-3"
-                src="assets/image/b.jpg"
+                src="/images/b.jpg"
                 alt="test"
               />
               <a href="#" class="fw-bolder fs-5">Gary si Siput</a>
@@ -192,8 +210,14 @@
               <div
                 class="btn-group gap-3 d-flex flex-row justify-content-center p-2"
               >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
+                <a
+                  class="col btn btn-danger pt-1 pb-1 btn-submit"
+                  href="/blog"
+                >Submit</a>
+                <a
+                  class="col btn btn-warning pt-1 pb-1 btn-delete"
+                  href="/blog"
+                >Delete</a>
               </div>
             </div>
           </div>
@@ -204,7 +228,7 @@
             <div class="card-body rounded-3 shadow">
               <img
                 class="card-img-top rounded-3"
-                src="assets/image/c.jpg"
+                src="/images/c.jpg"
                 alt="test"
               />
               <a href="#" class="fw-bolder fs-5">Patrick Star</a>
@@ -220,19 +244,25 @@
               <div
                 class="btn-group gap-3 d-flex flex-row justify-content-center p-2"
               >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
+                <a
+                  class="col btn btn-danger pt-1 pb-1 btn-submit"
+                  href="/blog"
+                >Submit</a>
+                <a
+                  class="col btn btn-warning pt-1 pb-1 btn-delete"
+                  href="/blog"
+                >Delete</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        {{! <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
           <div class="card card-my-project">
             <div class="card-body rounded-3 shadow">
               <img
                 class="card-img-top rounded-3"
-                src="assets/image/d.jpg"
+                src="/images/d.jpg"
                 alt="test"
               />
               <a href="#" class="fw-bolder fs-5">Squidward Tentacles</a>
@@ -248,8 +278,14 @@
               <div
                 class="btn-group row gap-3 d-flex justify-content-center p-2"
               >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
+                <a
+                  class="col btn btn-danger pt-1 pb-1 btn-submit"
+                  href="/blog"
+                >Submit</a>
+                <a
+                  class="col btn btn-warning pt-1 pb-1 btn-delete"
+                  href="/blog"
+                >Delete</a>
               </div>
             </div>
           </div>
@@ -260,7 +296,7 @@
             <div class="card-body rounded-3 shadow">
               <img
                 class="card-img-top rounded-3"
-                src="assets/image/f.jpg"
+                src="/images/e.jpg"
                 alt="test"
               />
               <a href="#" class="fw-bolder fs-5">Tuan Krabs</a>
@@ -276,8 +312,14 @@
               <div
                 class="btn-group row gap-3 d-flex justify-content-center p-2"
               >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
+                <a
+                  class="col btn btn-danger pt-1 pb-1 btn-submit"
+                  href="/blog"
+                >Submit</a>
+                <a
+                  class="col btn btn-warning pt-1 pb-1 btn-delete"
+                  href="/blog"
+                >Delete</a>
               </div>
             </div>
           </div>
@@ -288,7 +330,7 @@
             <div class="card-body rounded-3 shadow">
               <img
                 class="card-img-top rounded-3"
-                src="assets/image/h.jpg"
+                src="/images/f.jpg"
                 alt="test"
               />
               <a href="#" class="fw-bolder fs-5">Plankton</a>
@@ -304,96 +346,19 @@
               <div
                 class="btn-group row gap-3 d-flex justify-content-center p-2"
               >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
+                <a
+                  class="col btn btn-danger pt-1 pb-1 btn-submit"
+                  href="/blog"
+                >Submit</a>
+                <a
+                  class="col btn btn-warning pt-1 pb-1 btn-delete"
+                  href="/blog"
+                >Delete</a>
               </div>
             </div>
           </div>
-        </div>
+        </div> }}
 
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-          <div class="card card-my-project">
-            <div class="card-body rounded-3 shadow">
-              <img
-                class="card-img-top rounded-3"
-                src="assets/image/g.jpg"
-                alt="test"
-              />
-              <a href="#" class="fw-bolder fs-5">Sandy Cheeks</a>
-              <p>durasi: 3 bulan</p>
-              <p>bajing yg tinggal di dalam laut & merupakan binatang darat,</p>
-              <div class="d-flex gap-3 mb-3">
-                <i class="fa-brands fa-js"></i>
-                <i class="fa-brands fa-python"></i>
-                <i class="fa-brands fa-php"></i>
-                <i class="fa-brands fa-java"></i>
-              </div>
-
-              <div
-                class="btn-group row gap-3 d-flex justify-content-center p-2"
-              >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-          <div class="card card-my-project">
-            <div class="card-body rounded-3 shadow">
-              <img
-                class="card-img-top rounded-3"
-                src="assets/image/h.jpg"
-                alt="test"
-              />
-              <a href="#" class="fw-bolder fs-5">Pearl Krabs</a>
-              <p>durasi: 3 bulan</p>
-              <p>Pearl Krabs adalah anak dari tuan Krabs yang pelit</p>
-              <div class="d-flex gap-3 mb-3">
-                <i class="fa-brands fa-js"></i>
-                <i class="fa-brands fa-python"></i>
-                <i class="fa-brands fa-php"></i>
-                <i class="fa-brands fa-java"></i>
-              </div>
-
-              <div
-                class="btn-group row gap-3 d-flex justify-content-center p-2"
-              >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-          <div class="card card-my-project">
-            <div class="card-body rounded-3 shadow">
-              <img
-                class="card-img-top rounded-3"
-                src="assets/image/i.jpg"
-                alt="test"
-              />
-              <a href="#" class="fw-bolder fs-5">Nyonya Puff (Mrs. Puff)</a>
-              <p>durasi: 3 bulan</p>
-              <p>Ny puff pemilik sekaligus instruktur mengemudi kapal</p>
-              <div class="d-flex gap-3 mb-3">
-                <i class="fa-brands fa-js"></i>
-                <i class="fa-brands fa-python"></i>
-                <i class="fa-brands fa-php"></i>
-                <i class="fa-brands fa-java"></i>
-              </div>
-
-              <div
-                class="btn-group row gap-3 d-flex justify-content-center p-2"
-              >
-                <button class="col pt-1 pb-1 btn-edit">Edit</button>
-                <button class="col pt-1 pb-1 btn-delete">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
