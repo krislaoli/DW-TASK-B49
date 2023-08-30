@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 8000;
+const PORT = 5000;
 const path = require("path");
 // const { start } = require("repl");
 
@@ -80,10 +80,7 @@ app.listen(PORT, () => {
   console.log("Server running on port ${PORT}");
 });
 
-// form home
-// // function home(req, res) {
-//   res.render("index", { dataBlog: dataBlog });
-// }
+
 
 //  blog
 function blog(req, res) {
@@ -92,7 +89,6 @@ function blog(req, res) {
 
 // add new blog
 function addBlog(req, res) {
-  // const { title, startDate, endDate, content, images, nodejs, reactjs, js, vuejs, } = req.body;
   const  {
     title,
     content,
@@ -150,24 +146,12 @@ function addBlog(req, res) {
 
 async function home(req, res) {
   try{
-    const query= `id, title, content, images, "startDate", "endDate", duration, nodejs, reactjs, js, vuejs, "createdAt", "updatedAt"
+    const query= `select id, title, content, images, "startDate", "endDate", duration, nodejs, reactjs, js, vuejs, "createdAt", "updatedAt"
 	FROM public."Projects";`
 
           let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
         console.log(obj)
 
-        // let dataProjectRes = obj.map((item) => {
-        //     return {
-        //         ...item,
-        //         duration: dateDuration(item.startDate, item.endDate),
-        //         tech: {
-        //             gitHub: true,
-        //             ig: true,
-        //             fb: true,
-        //             twt: false
-        //         }
-        //     }
-        // })
         res.render('index', {dataBlog: obj}) 
   }catch(error){
     console.log(error)
@@ -184,27 +168,6 @@ function editBlog(req, res) {
 function updateBlog(req, res) {
     const blogIndex = parseInt(req.body.blogIndex)
     const { title, startDate, endDate, content, images, nodejs, reactjs, js, vuejs } = req.body
-
-    // if (start > end) {
-    //   return res.send("You Fill End Date Before Start Date");
-    // }
-
-    // let difference = end.getTime() - start.getTime();
-    // let days = difference / (1000 * 3600 * 24);
-    // let weeks = Math.floor(days / 7);
-    // let months = Math.floor(weeks / 4);
-    // let years = Math.floor(months / 12);
-    // let duration = "";
-
-    // if (years > 0) {
-    //   duration = years + " Tahun";
-    // }else if (months > 0) {
-    //   duration = months + " Bulan";
-    // }else if (weeks > 0) {
-    //   duration = weeks + " Minggu";
-    // }else if (days > 0) {
-    //   duration = days + "Hari";
-    // }
 
     dataBlog[blogIndex].title = title;
     dataBlog[blogIndex].content = content;
