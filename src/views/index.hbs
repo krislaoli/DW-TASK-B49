@@ -162,10 +162,12 @@
                         href="/blog-detail/{{@index}}"
                         class="text-decoration-none text-dark"
                         target="_blank">
-                    <a href="/blog-detail/{{@index}}" style="color: black; text-decoration: none;">
-                    {{this.title}}</a></h5>
-                  {{!-- <p class="card-duration"></p> --}}
-                  <p class="card-duration mt-3"  style="font-size: 14px;">Durasi 2 Bulan</p>
+                    <a href="/blog-detail/{{@index}}" style="color: black;          text-decoration: none;">
+                        {{this.title}}
+                    </a>
+                  </h5>
+                  <p>{{this.startDate}} || {{this.endDate}}</p>
+                  <p class="card-duration mt-3"  style="font-size: 14px;">Durasi 2 Bulan {{this.duration}}</p>
                   <p  class="card-text" 
                       style="text-align: justify; 
                             verflow: hidden; 

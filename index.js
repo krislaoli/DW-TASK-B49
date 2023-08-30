@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
-const PORT = 5000;
+const PORT = 8000;
 const path = require("path");
+// const { start } = require("repl");
+
+const config = require('./src/config/config.json')
+const {Sequelize, QueryTypes} = require('sequelize')
+const sequelize = new Sequelize(config.development)
 // const dateDuration = require("./src/helper/duration")
 
 // set up call hbs untuk sub folder
@@ -15,50 +20,50 @@ app.use(express.static(path.join(__dirname, "src/assets")));
 app.use(express.urlencoded({ extended: false }));
 
 // dummy data
-const dataBlog = [
-  {
-    // id 0
-    title: "Front End",
-    content: "apa saja yang penting kerja",
-    images: "images/a.jpg",
-    startDate: "2023-08-01",
-    endDate: "2024-12-01",
-    duration: "1 bulan",
-    nodejs: true,
-    reactjs: true,
-    js: true,
-    vuejs: true,
-    // postedAt: new Date()
-  },
-  {
-    // id 1
-    title: "Back End",
-    content: "apa saja yang penting kerja",
-    images: "images/b.jpg",
-    startDate: "2023-08-01",
-    endDate: "2024-12-01",
-    duration: "1 bulan",
-    nodejs: true,
-    reactjs: true,
-    js: true,
-    vuejs: true,
-    // postedAt: new Date()
-  },
-  {
-    // id 2
-    title: "Fullstack Developer",
-    content: "apa saja yang penting kerja",
-    images: "images/c.jpg",
-    startDate: "2023-08-01",
-    endDate: "2024-12-01",
-    duration: "1 bulan",
-    nodejs: false,
-    reactjs: false,
-    js: true,
-    vuejs: true,
-    postedAt: new Date()
-  },
-];
+//   const dataBlog = [
+//     {
+//       // id 0
+//       title: "Front End",
+//       content: "apa saja yang penting kerja",
+//       images: "images/a.jpg",
+//       startDate: "2023-08-01",
+//       endDate: "2024-12-01",
+//       duration: "1 bulan",
+//       nodejs: true,
+//       reactjs: true,
+//       js: true,
+//       vuejs: true,
+//       // postedAt: new Date()
+//     },
+//     {
+//       // id 1
+//       title: "Back End",
+//       content: "apa saja yang penting kerja",
+//       images: "images/b.jpg",
+//       startDate: "2023-08-01",
+//       endDate: "2024-12-01",
+//       duration: "1 bulan",
+//       nodejs: true,
+//       reactjs: true,
+//       js: true,
+//       vuejs: true,
+//       // postedAt: new Date()
+//   },
+//   {
+//     // id 2
+//     title: "Fullstack Developer",
+//     content: "apa saja yang penting kerja",
+//     images: "images/c.jpg",
+//     startDate: "2023-08-01",
+//     endDate: "2024-12-01",
+//     duration: "1 bulan",
+//     nodejs: false,
+//     reactjs: false,
+//     js: true,
+//     vuejs: true,
+//     // postedAt: new Date()
+//   },
+// ];
 
 // routing
 app.get("/", home);
@@ -76,9 +81,9 @@ app.listen(PORT, () => {
 });
 
 // form home
-function home(req, res) {
-  res.render("index", { dataBlog: dataBlog });
-}
+// // function home(req, res) {
+//   res.render("index", { dataBlog: dataBlog });
+// }
 
 //  blog
 function blog(req, res) {
@@ -108,7 +113,7 @@ function addBlog(req, res) {
     return res.send("You Fill End Date Before Start Date");
   }
 
-  let difference = end.getTime() -start.getTime();
+  let difference = end.getTime() - start.getTime();
   let days = difference / (1000 * 3600 * 24);
   let weeks = Math.floor(days / 7);
   let months = Math.floor(weeks / 4);
@@ -143,6 +148,32 @@ function addBlog(req, res) {
 
 }
 
+async function home(req, res) {
+  try{
+    const query= `id, title, content, images, "startDate", "endDate", duration, nodejs, reactjs, js, vuejs, "createdAt", "updatedAt"
+	FROM public."Projects";`
+
+          let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
+        console.log(obj)
+
+        // let dataProjectRes = obj.map((item) => {
+        //     return {
+        //         ...item,
+        //         duration: dateDuration(item.startDate, item.endDate),
+        //         tech: {
+        //             gitHub: true,
+        //             ig: true,
+        //             fb: true,
+        //             twt: false
+        //         }
+        //     }
+        // })
+        res.render('index', {dataBlog: obj}) 
+  }catch(error){
+    console.log(error)
+  }
+}
+
 // edit to blog
 function editBlog(req, res) {
   const id = parseInt(req.params.id);
@@ -154,13 +185,33 @@ function updateBlog(req, res) {
     const blogIndex = parseInt(req.body.blogIndex)
     const { title, startDate, endDate, content, images, nodejs, reactjs, js, vuejs } = req.body
 
+    // if (start > end) {
+    //   return res.send("You Fill End Date Before Start Date");
+    // }
+
+    // let difference = end.getTime() - start.getTime();
+    // let days = difference / (1000 * 3600 * 24);
+    // let weeks = Math.floor(days / 7);
+    // let months = Math.floor(weeks / 4);
+    // let years = Math.floor(months / 12);
+    // let duration = "";
+
+    // if (years > 0) {
+    //   duration = years + " Tahun";
+    // }else if (months > 0) {
+    //   duration = months + " Bulan";
+    // }else if (weeks > 0) {
+    //   duration = weeks + " Minggu";
+    // }else if (days > 0) {
+    //   duration = days + "Hari";
+    // }
+
     dataBlog[blogIndex].title = title;
     dataBlog[blogIndex].content = content;
     dataBlog[blogIndex].nodejs = nodejs;
     dataBlog[blogIndex].reactjs = reactjs;
     dataBlog[blogIndex].js = js;
     dataBlog[blogIndex].vuejs = vuejs;
-    // dataBlog[blogIndex].postedAt = new Date();
     console.log(title, content)
     res.redirect("/");
 }
