@@ -36,6 +36,17 @@
             <li class="nav-item fw-bold ms-3">
               <a class="nav-link" href="/blog"> Add Project </a>
             </li>
+            {{!-- <li class="nav-item fw-bold ms-3">
+              <a class="nav-link active" href="/register">
+                Register
+              </a>
+            </li>
+
+            <li class="nav-item fw-bold ms-3">
+              <a class="nav-link active" href="/login">
+                Login
+              </a>
+            </li> --}}
           </ul>
           <!-- button contact -->
           <div class="d-flex">
@@ -70,8 +81,8 @@
                     type="date"
                     class="form-control shadow-sm bg-secondary-subtle"
                     id="formStartDate" 
-                    name="projectStartDate"
-                    value="{{project.startDate}}"
+                    name="startDate"
+                    value="{{blog.startDate}}"
                     />
             </div>
             <div class="col-sm-4">
@@ -80,7 +91,8 @@
                     type="date"
                     class="form-control shadow-sm bg-secondary-subtle"
                     id="input-blog-endDate"
-                    name="endDate"/>
+                    name="endDate"
+                    value="{{blog.endDate}}"/>
             </div>
         </div>
         <div class="row mb-3 justify-content-center">
@@ -101,9 +113,9 @@
         </div>
         <div class="row justify-content-center fs-5">
             <div class="col-sm-4 ">
-                <div class="form-check d-flex align-items-center gap-2">
+                <div class="form-check d-flex align-items-center gap-2 ">
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="nodejs"
                         id="checkbox-nodejs"
@@ -112,7 +124,7 @@
                 </div>
                 <div class="form-check d-flex align-items-center gap-2">
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="reactjs"
                         id="checkbox-reactjs"
@@ -123,7 +135,7 @@
             <div class="col-sm-4">
                 <div class="form-check d-flex align-items-center gap-2">
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="js"
                         id="checkbox-js"
@@ -132,7 +144,7 @@
                 </div>
                 <div class="form-check d-flex align-items-center gap-2 mb-3">
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="vuejs"
                         id="checkbox-vuejs"
@@ -148,7 +160,7 @@
             </div>
             <div class="row mb-3 d-flex justify-content-end">
                 <div class="col-sm-4">
-                    <button class="btn btn-primary rounded-pill px-5" type="submit">Submit</button>
+                    <button class="btn btn-primary bg-warning rounded-pill px-5" type="submit">Submit</button>
                 </div>
             </div>
             </form>

@@ -27,7 +27,7 @@
                     <h2>Created Blog</h2>
                 </div>
             </div>
-            <form method="post" action="/update-blog/{{blogIndex}}">
+            <form method="post" action="/update-blog/{{blog.id}}">
             <div class="row mb-3 justify-content-center ">
                 <div class="col-8  ">
                     <label for="input-title" class="form-label fs-3">Project Name</label>
@@ -47,7 +47,9 @@
                     type="date"
                     class="form-control shadow-sm bg-secondary-subtle"
                     id="input-blog-startDate" 
-                    name="startDate"/>
+                    name="startDate"
+                    value="{{blog.startDate}}"
+                    />
             </div>
             <div class="col-md-4">
                 <label for="input-blog-endDate" class="form-label fs-3">End Date</label>
@@ -55,7 +57,9 @@
                     type="date"
                     class="form-control shadow-sm bg-secondary-subtle"
                     id="input-blog-endDate"
-                    name="endDate"/>
+                    name="endDate"
+                    value="{{blog.endDate}}"
+                    />
             </div>
         </div>
         <div class="row mb-3 justify-content-center">
@@ -81,7 +85,7 @@
                 <div class="form-check d-flex align-items-center gap-2">
                     {{#if blog.nodejs}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="nodejs"
                         id="checkbox-nodejs"
@@ -90,7 +94,7 @@
                     />
                     {{else}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="nodejs"
                         id="checkbox-nodejs"
@@ -102,7 +106,7 @@
                 <div class="form-check d-flex align-items-center gap-2">
                     {{#if blog.reactjs}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="reactjs"
                         id="checkbox-reactjs"
@@ -111,7 +115,7 @@
                     />
                     {{else}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="reactjs"
                         id="checkbox-reactjs"
@@ -125,7 +129,7 @@
                 <div class="form-check d-flex align-items-center gap-2">
                     {{#if blog.js}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="js"
                         id="checkbox-js"
@@ -134,7 +138,7 @@
                     />
                     {{else}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="js"
                         id="checkbox-js"
@@ -146,7 +150,7 @@
                 <div class="form-check d-flex align-items-center gap-2">
                     {{#if blog.vuejs}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="vuejs"
                         id="checkbox-vuejs"
@@ -155,7 +159,7 @@
                     />
                     {{else}}
                     <input
-                        class="form-check-input bg-secondary-subtle"
+                        class="form-check-input bg-dark"
                         type="checkbox"
                         value="vuejs"
                         id="checkbox-vuejs"
@@ -177,7 +181,7 @@
             <input type="hidden" name="blogIndex" value="{{blogIndex}}" />
             <div class="row mb-3 d-flex justify-content-end">
                 <div class="col-4">
-                    <button class="btn btn-primary rounded-pill px-5" type="submit">Submit</button>
+                    <button class="btn btn-warning rounded-pill px-5" type="submit">Submit</button>
                 </div>
             </div>
             </form>

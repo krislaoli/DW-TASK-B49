@@ -30,3 +30,5 @@ function dateDuration(startDate, endDate) {
     const secondsInYear = 60 * 60 * 24 * 365.25; // Rata-rata tahun dalam detik
     return Math.floor(seconds / secondsInYear);
   }
+
+  module.exports=dateDuration;

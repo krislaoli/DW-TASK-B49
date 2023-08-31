@@ -44,6 +44,18 @@
                 Add Project
               </a>
             </li>
+
+            {{!-- <li class="nav-item fw-bold ms-3">
+              <a class="nav-link active" href="/register">
+                Register
+              </a>
+            </li>
+
+            <li class="nav-item fw-bold ms-3">
+              <a class="nav-link active" href="/login">
+                Login
+              </a>
+            </li> --}}
           </ul>
           <!-- button contact -->
           <div class="d-flex">
@@ -129,7 +141,7 @@
           >
             <img
               class="card-img-top rounded-top-3"
-              src="/images/kris.JPG"
+              src="/images/h.JPG"
               alt="card-photo"
             />
             <div class="card-body rounded-3">
@@ -162,18 +174,19 @@
                         href="/blog-detail/{{@index}}"
                         class="text-decoration-none text-dark"
                         target="_blank">
-                    <a href="/blog-detail/{{@index}}" style="color: black;          text-decoration: none;">
+                    <a href="/blog-detail/{{@index}}" style="color: black;text-decoration: none;">
                         {{this.title}}
                     </a>
                   </h5>
-                  <p>{{this.startDate}} || {{this.endDate}}</p>
-                  <p class="card-duration mt-3"  style="font-size: 14px;">Durasi 2 Bulan {{this.duration}}</p>
-                  <p  class="card-text" 
-                      style="text-align: justify; 
-                            verflow: hidden; 
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 4;
-                            -webkit-box-orient: vertical;">{{this.content}}</p>
+                    <p>{{this.startDate}} || {{this.endDate}}</p>
+                    <p class="card-duration mt-3"  style="font-size: 14px;">{{this.duration}}</p>
+                    <p  class="card-text" 
+                        style="text-align: justify; 
+                              verflow: hidden; 
+                              display: -webkit-box; 
+                              -webkit-line-clamp: 4;
+                              -webkit-box-orient: vertical;">{{this.content}}
+                    </p>
                   <div class="gap-5 fs-3 mb-3">
                     {{#if this.nodejs}}
                     <a><i class="fa-brands fa-node-js"></i></a>
@@ -189,9 +202,16 @@
                     {{/if}}
                   </div>
                   <div class="d-flex justify-content-between">
-                    <button class="btn btn-dark rounded-pill px-5"><a href="/edit-blog/{{@index}}
-                    " style="text-decoration: none ; color:white;">Edit</a></button>
-                    <button class="btn btn-dark rounded-pill px-5"><a href="/delete-blog/{{@index}}" style="text-decoration: none ; color:white;">Delete</a></button>
+                    <button class="btn btn-warning rounded-pill px-5"> 
+                      <a href="/edit-blog/{{this.id}}"
+                         style="text-decoration: none ; color:rgb(0, 0, 0);">Edit
+                      </a>
+                    </button>
+                    <button class="btn btn-danger rounded-pill px-5">
+                      <a href="/delete-blog/{{this.id}}" 
+                         style="text-decoration: none ; color:rgb(0, 0, 0);">Delete
+                      </a>
+                    </button>
                   </div>
                 </div>
               </div>
