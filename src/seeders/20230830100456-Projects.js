@@ -20,7 +20,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: "ada paa",
+        title: "mama suka",
         content: "apa kabar",
         images: "images/a.jpg",
         startDate: "2023-08-10",

@@ -13,20 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
-    title: DataTypes.STRING,
-    content: DataTypes.STRING,
-    images: DataTypes.STRING,
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE,
-    duration: DataTypes.DATE,
-    nodejs: DataTypes.STRING,
-    reactjs: DataTypes.STRING,
-    js: DataTypes.STRING,
-    vuejs: DataTypes.STRING
+  user.init({
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'user',
+    timestamps: true,
+    createdAt: true,
+    updatedAt: true
   });
-  return User;
+  return user;
 };

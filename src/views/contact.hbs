@@ -26,25 +26,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link" aria-current="page" href="/">Home</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/"
+              >Home</a>
             </li>
 
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link" href="/blog"> Add Project </a>
+              <a class="nav-link active" href="/blog"> Add Project </a>
             </li>
-
-            {{!-- <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="/register">
-                Register
-              </a>
-            </li>
-
-            <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="/login">
-                Login
-              </a>
-            </li>
-          </ul> --}}
+          </ul>
           <!-- button contact -->
           <div class="d-flex">
             <a
@@ -56,6 +48,7 @@
         </div>
       </div>
     </nav>
+
 
     <!-- form content -->
 <section>
@@ -87,20 +80,28 @@
                 <option>Fullstack</option>
               </select>
             </div>
+
+            {{!-- pesan --}}
             <div class="mb-3">
-              <label for="input-message" class="form-label fs-4">Your Message</label>
-              <textarea
-                class="form-control shadow-sm bg-secondary-subtle"
-                id="massage"
-                rows="3"
-                style="height: 200px; resize: none"></textarea>
+                <label for="input-message" class="form-label fs-4">Your Message</label>
+                  <textarea
+                    class="form-control shadow-sm bg-secondary-subtle"
+                    id="massage"
+                    rows="3"
+                    style="height: 200px; resize: none">
+                  </textarea>
             </div>
+            {{!-- pesan end --}}
+
+            {{!-- button submit --}}
             <div class="mb-3 d-flex justify-content-end my-4">
               <button
-                class="btn btn-primary rounded-pill px-4"
+                class="btn btn-danger rounded-pill px-4"
                 type="button"
                 onclick="submitData()">Submit</button>
             </div>
+            {{!-- button submit end --}}
+
           </div>
         </div>
       </div>

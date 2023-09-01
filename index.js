@@ -2,15 +2,19 @@ const express = require("express");
 const app = express();
 const PORT = 5000;
 const path = require("path");               
-const bcrypt = require('bcrypt');
-const session = require('express-session');
-const flash = require('express-flash');                                              
-// const { start } = require("repl");
 const dateDuration = require('./src/helper/duration')
 const moment = require('moment')
+const bcrypt = require('bcrypt');
+// const session = require('express-session');
+// const flash = require('express-flash');                                              
+// const { start } = require("repl");
+// const upload = require
+
 const config = require('./src/config/config.json')
-const {Sequelize, QueryTypes} = require('sequelize')
+const {Sequelize, QueryTypes} = require('sequelize');
+const { error } = require("console");
 const sequelize = new Sequelize(config.development)
+// const dateDuration = require("./src/helper/duration")
 
 // set up call hbs untuk sub folder
 app.set("view engine","hbs");
@@ -29,20 +33,20 @@ app.use(express.static('src/assets'))
 app.use(express.urlencoded({ extended: false }))
 
 // setup flash
-app.use(flash())
+// app.use(flash())
 
 // setup session
-app.use(session({
-  cookie: {
-    httpOnly: true,
-    secure: false,
-    maxAge: 1000 * 60 * 60 * 2
-  },
-  store: new session.MemoryStore(),
-  saveUninitialized: true,
-  resave: false,
-  secret: 'secretValue'
-}))
+// app.use(session({
+//   cookie: {
+//     httpOnly: true,
+//     secure: false,
+//     maxAge: 1000 * 60 * 60 * 2
+//   },
+//   store: new session.MemoryStore(),
+//   saveUninitialized: true,
+//   resave: false,
+//   secret: 'secretValue'
+// }))
 
 // dummy data
 //   const dataBlog = [
@@ -99,9 +103,14 @@ app.post("/blog", addBlog);
 app.post("/update-blog/:id", updateBlog);
 app.get("/edit-blog/:id", editBlog);
 app.get("/delete-blog/:id", deleteBlog);
+
+// login dan register user
 app.get("/register", formRegister)
-app.post("/register", addUser)
 app.get("/login", formLogin)
+
+// update login dan register user
+app.post("/register", newUser)
+
 
 // local server
 app.listen(PORT, () => {
@@ -172,15 +181,15 @@ function blog(req, res) {
 
 async function addBlog(req, res) {
 	try {
-		const { title, content, images, startDate, endDate, nodejs, reactjs, js, vuejs } =
+		const { author, title, content, images, startDate, endDate, nodejs, reactjs, js, vuejs } =
 			req.body;
 		// const images = "image.png";
 		const nodejsCheck = nodejs ? true : false;
 		const reactjsCheck = reactjs ? true : false;
 		const jsCheck = js ? true : false;
 		const vuejsCheck = vuejs ? true : false;
-		await sequelize.query(`INSERT INTO "Projects"(title, content, images,  "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
-	VALUES ('${title}',  '${content}', '${images}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
+		await sequelize.query(`INSERT INTO "Projects"(title, content, images, "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
+	VALUES ('${title}', '${content}', '${images}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
 		res.redirect("/");
 	} catch (error) {
 		console.log(error);
@@ -189,15 +198,16 @@ async function addBlog(req, res) {
 
 async function home(req, res) {
   try{
-    const query= `select id, title, content, images, "startDate", "endDate", duration, nodejs, reactjs, js, vuejs, "createdAt", "updatedAt"
+    const query= `select id, title, content, images, "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt"
 	FROM public."Projects";`
 
         let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
-        console.log(obj)
 
         let dataBlogRes = obj.map((item) => {
           return {
             ...item,
+            startDate: moment(item.startDate).format("DD-MMM-YYYY"),
+            endDate: moment(item.endDate).format("DD-MMM-YYYY"),
             duration: dateDuration(item.startDate, item.endDate),
           };
         });
@@ -211,7 +221,7 @@ async function home(req, res) {
 async function updateBlog(req, res) {
 	try {
 		const { id } = req.params;
-		const { title, content, startDate, endDate, nodejs, reactjs, js, vuejs } = req.body;
+		const {title, images, content, startDate, endDate, nodejs, reactjs, js, vuejs } = req.body;
 		const nodejsCheck = nodejs ? true : false;
 		const reactjsCheck = reactjs ? true : false;
 		const jsCheck = js ? true : false;
@@ -219,6 +229,7 @@ async function updateBlog(req, res) {
 		await sequelize.query(`UPDATE "Projects" 
         SET 
             title = '${title}', 
+            images = '${images}', 
             content = '${content}', 
             "startDate" = '${startDate}', 
             "endDate" = '${endDate}', 
@@ -260,13 +271,6 @@ async function deleteBlog(req, res) {
 	}
 }
 
-function formRegister(req, res) {
-  res.render('register')
-}
-
-function formLogin(req, res) {
-  res.render('login')
-}
 
 // 
 async function editBlog(req, res) {
@@ -289,32 +293,59 @@ async function editBlog(req, res) {
 	}
 }
 
-async function addUser(req, res) {
-  try {
-    const { email, password } = req.body
-    const query = `SELECT * FROM users WHERE email = '${email}'`
-    let obj = await sequelize.query(query, { type: QueryTypes.SELECT })
+// async function addUser(req, res) {
+//   try {
+//     const { email, password } = req.body
+//     const query = `SELECT * FROM users WHERE email = '${email}'`
+//     let obj = await sequelize.query(query, { type: QueryTypes.SELECT })
 
-    console.log(obj)
+//     console.log(obj)
 
-    // checking if email has not been registered
-    if(!obj.length) {
-      req.flash('danger', "user has not been registered")
-      return res.redirect('/login')
-    }
+//     // checking if email has not been registered
+//     if(!obj.length) {
+//       req.flash('danger', "user has not been registered")
+//       return res.redirect('/login')
+//     }
 
-    await bcrypt.compare(password, obj[0].password, (err, result) => {
-      if(!result) {
-        req.flash('danger', 'password wrong')
-        return res.redirect('/login')
-      } else {
-        req.session.isLogin = true
-        req.session.user = obj[0].name
-        req.flash('success', 'login success')
-        res.redirect('/')
-      }
+//     await bcrypt.compare(password, obj[0].password, (err, result) => {
+//       if(!result) {
+//         req.flash('danger', 'password wrong')
+//         return res.redirect('/login')
+//       } else {
+//         req.session.isLogin = true
+//         req.session.user = obj[0].name
+//         req.flash('success', 'login success')
+//         res.redirect('/')
+//       }
+//     })
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+function formRegister(req, res) {
+  res.render('register')
+}
+
+function formLogin(req, res) {
+  res.render('login')
+}
+
+async function newUser(req, res) {
+    try {
+    const { name, email, password } = req.body
+    const salt = 10
+
+    // const obj = await bcrypt.hash(password, salt)
+    await bcrypt.hash(password, salt, (err, hashPassword) => {
+      const query = `INSERT INTO users (name, email, password, "createdAt", 
+      "updatedAt") VALUES ('${name}', '${email}', '${hashPassword}', NOW(), NOW())`
+      
+
+      sequelize.query(query)
+      res.redirect('login')
     })
-  } catch (error) {
+    } catch (error) {
     console.log(error)
-  }
+    }
 }

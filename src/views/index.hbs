@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link" aria-current="page" href="/index">Home</a>
+              <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
 
             <li class="nav-item fw-bold ms-3">
@@ -44,18 +44,6 @@
                 Add Project
               </a>
             </li>
-
-            {{!-- <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="/register">
-                Register
-              </a>
-            </li>
-
-            <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="/login">
-                Login
-              </a>
-            </li> --}}
           </ul>
           <!-- button contact -->
           <div class="d-flex">
@@ -70,14 +58,14 @@
     </nav>
 
     <!-- content section -->
-    <div class="container-card d-flex">
+    <div class="container-card d-flex ">
       <div
-        class="card container-card-content d-flex align-items-center justify-content-center"
+        class="card container-card-content d-flex align-items-center justify-content-center bg-secondary"
       >
         <div class="card-list-content d-flex flex-row p-5">
           <div class="card-body card-body-text p-0">
-            <h2 class="card-title">Welcome To My Web Kris</h2>
-            <p class="card-text pe-4 mt-4">
+            <h2 class="card-title text-white">Welcome To My Web Kris</h2>
+            <p class="card-text pe-4 mt-4 text-white">
               Perkenalkan saya kris, saya membuat web ini untuk mengembangkan
               skill dalam belajar berkarir sebagai "Fullstack Developer", saya
               membuat sebuah website statis dengan menggunakan bahasa markup
@@ -93,13 +81,13 @@
               class="card-content-list d-flex flex-sm-row align-items-center mt-5"
             >
               <button class="btn btn-dark rounded-pill ps-4 pe-4 me-4">
-                <a class="text-light fs-6 fw-bolder" href="/contact">
+                <a class="text-light fs-6 fw-bolder text-decoration-none" href="/contact">
                   Contact
                 </a>
               </button>
 
               <a
-                class="text-dark fs-6 fw-bolder"
+                class="text-dark fs-6 fw-bolder text-decoration-none text-white"
                 href="CV.pdf"
                 download
               >Download CV
@@ -156,29 +144,36 @@
     </div>
 
     <!-- my project content -->
-      <hr class="line" />
-      <section>
-        <div class="container">
+    <hr class="line" />   
+      <section class="bg-warning">
+
+        <div class="container ">
           <div class="row">
-            <div class="col-sm-11">
-              <h2 class="text-center my-4 mx-4">My Project</h2>
-            </div>
+              <div class="col-sm-11">
+                <h2 class="text-center my-4 mx-4">My Project</h2>
+              </div>
           </div>
+
+          {{!-- Content Card --}}
           <div class="row">
             {{#each dataBlog}}
             <div class="col-sm-4 mb-5">
-              <div class="card p-2 " style="width: 320px; box-shadow: 0 0 10px black;">
-                <img src="/{{this.images}}" class="card-img-top" alt="#">
+              <div class="card p-2" style="width: 350px; box-shadow: 0 0 30px black;">
+                    <img src="/images/{{this.images}}" 
+                        class="card-img-top" 
+                        alt="" 
+                        name="cardImg">
                 <div class="card-body">
                   <h5 class="card-title fw-bold" 
-                        href="/blog-detail/{{@index}}"
-                        class="text-decoration-none text-dark"
-                        target="_blank">
-                    <a href="/blog-detail/{{@index}}" style="color: black;text-decoration: none;">
-                        {{this.title}}
-                    </a>
+                          href="/blog-detail/{{@index}}"
+                          class="text-decoration-none text-dark"
+                          target="_blank">
+                      <a href="/blog-detail/{{@index}}" 
+                         style="color: black;text-decoration: none;">
+                         {{this.title}}
+                      </a>
                   </h5>
-                    <p>{{this.startDate}} || {{this.endDate}}</p>
+                    <p>{{this.startDate}} --||-- {{this.endDate}}</p>
                     <p class="card-duration mt-3"  style="font-size: 14px;">{{this.duration}}</p>
                     <p  class="card-text" 
                         style="text-align: justify; 
@@ -187,6 +182,8 @@
                               -webkit-line-clamp: 4;
                               -webkit-box-orient: vertical;">{{this.content}}
                     </p>
+
+                  {{!-- icon  --}}
                   <div class="gap-5 fs-3 mb-3">
                     {{#if this.nodejs}}
                     <a><i class="fa-brands fa-node-js"></i></a>
@@ -201,6 +198,9 @@
                     <a><i class="fa-brands fa-vuejs"></i></a>
                     {{/if}}
                   </div>
+                  {{!-- icon end --}}
+
+                  {{!-- button edit n delete --}}
                   <div class="d-flex justify-content-between">
                     <button class="btn btn-warning rounded-pill px-5"> 
                       <a href="/edit-blog/{{this.id}}"
@@ -208,16 +208,20 @@
                       </a>
                     </button>
                     <button class="btn btn-danger rounded-pill px-5">
-                      <a href="/delete-blog/{{this.id}}" 
-                         style="text-decoration: none ; color:rgb(0, 0, 0);">Delete
-                      </a>
+                        <a href="/delete-blog/{{this.id}}" 
+                          style="text-decoration: none ; color:rgb(0, 0, 0);">Delete
+                        </a>
                     </button>
                   </div>
+                  {{!-- button edit n delete end --}}
+
                 </div>
               </div>
             </div>
             {{/each}}
           </div>
+        {{!-- Content Card end --}}
+
         </div>
       </section>
       <!-- end blog -->

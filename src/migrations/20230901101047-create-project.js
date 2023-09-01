@@ -9,6 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      author: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id'
+        }
+      },
+
       title: {
         type: Sequelize.STRING
       },
@@ -18,14 +26,11 @@ module.exports = {
       images: {
         type: Sequelize.STRING
       },
-      startDate: {
+      starDate: {
         type: Sequelize.DATE
       },
       endDate: {
         type: Sequelize.DATE
-      },
-      duration: {
-        type: Sequelize.STRING
       },
       nodejs: {
         type: Sequelize.BOOLEAN

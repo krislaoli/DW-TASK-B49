@@ -2,41 +2,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      name: {
         type: Sequelize.STRING
       },
-      content: {
+      email: {
         type: Sequelize.STRING
       },
-      images: {
-        type: Sequelize.STRING
-      },
-      startDate: {
-        type: Sequelize.DATE
-      },
-      endDate: {
-        type: Sequelize.DATE
-      },
-      duration: {
-        type: Sequelize.DATE
-      },
-      nodejs: {
-        type: Sequelize.STRING
-      },
-      reactjs: {
-        type: Sequelize.STRING
-      },
-      js: {
-        type: Sequelize.STRING
-      },
-      vuejs: {
+      password: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -50,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('users');
   }
 };
