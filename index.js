@@ -49,16 +49,21 @@ app.use(session({
 // routing
 app.get("/", home);
 app.get("/blog", blog);
+app.post("/blog", addBlog);
+// app.post("/blog", upload.single("upload-image"), addBlog);
+
 app.get("/blog-detail/:id", blogDetail);
 app.get("/contact", contact);
-app.post("/blog", addBlog);
 app.post("/update-blog/:id", updateBlog);
+// app.post("/update-blog/:id", upload.single("upload-image"), updateBlog);
+
 app.get("/edit-blog/:id", editBlog);
 app.get("/delete-blog/:id", deleteBlog);
 app.get("/register", formRegister)
 app.get("/login", formLogin)
 app.post("/register", newUser)
 app.post("/login", userLogin)
+
 app.get("/logout", (req, res) => {
   req.session.destroy()
   res.redirect("/")
@@ -84,6 +89,7 @@ async function home(req, res) {
             duration: dateDuration(item.startDate, item.endDate),
             isLogin: req.session.isLogin,
             user: req.session.user,
+            // idUser: req.session
           };
         });
 
@@ -99,11 +105,12 @@ async function addBlog(req, res) {
 		const { author, title, content, images, startDate, endDate, nodejs, reactjs, js, vuejs } =
 			req.body;
 		// const images = "image.png";
+    // const author = req.session.idUser
 		const nodejsCheck = nodejs ? true : false;
 		const reactjsCheck = reactjs ? true : false;
 		const jsCheck = js ? true : false;
 		const vuejsCheck = vuejs ? true : false;
-		await sequelize.query(`INSERT INTO "Projects"(title, content, images, "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
+		await sequelize.query(`INSERT INTO "Projects"(title, content, images, author, "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
 	VALUES ('${title}', '${content}', '${images}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
 		res.redirect("/");
 	} catch (error) {
