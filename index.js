@@ -5,8 +5,8 @@ const path = require("path");
 const dateDuration = require('./src/helper/duration')
 const moment = require('moment')
 const bcrypt = require('bcrypt');
-// const session = require('express-session');
-// const flash = require('express-flash');                                              
+const session = require('express-session');
+const flash = require('express-flash');                                              
 // const { start } = require("repl");
 // const upload = require
 
@@ -14,7 +14,6 @@ const config = require('./src/config/config.json')
 const {Sequelize, QueryTypes} = require('sequelize');
 const { error } = require("console");
 const sequelize = new Sequelize(config.development)
-// const dateDuration = require("./src/helper/duration")
 
 // set up call hbs untuk sub folder
 app.set("view engine","hbs");
@@ -33,66 +32,19 @@ app.use(express.static('src/assets'))
 app.use(express.urlencoded({ extended: false }))
 
 // setup flash
-// app.use(flash())
+app.use(flash())
 
-// setup session
-// app.use(session({
-//   cookie: {
-//     httpOnly: true,
-//     secure: false,
-//     maxAge: 1000 * 60 * 60 * 2
-//   },
-//   store: new session.MemoryStore(),
-//   saveUninitialized: true,
-//   resave: false,
-//   secret: 'secretValue'
-// }))
-
-// dummy data
-//   const dataBlog = [
-//     {
-//       // id 0
-//       title: "Front End",
-//       content: "apa saja yang penting kerja",
-//       images: "images/a.jpg",
-//       startDate: "2023-08-01",
-//       endDate: "2024-12-01",
-//       duration: "1 bulan",
-//       nodejs: true,
-//       reactjs: true,
-//       js: true,
-//       vuejs: true,
-//       // postedAt: new Date()
-//     },
-//     {
-//       // id 1
-//       title: "Back End",
-//       content: "apa saja yang penting kerja",
-//       images: "images/b.jpg",
-//       startDate: "2023-08-01",
-//       endDate: "2024-12-01",
-//       duration: "1 bulan",
-//       nodejs: true,
-//       reactjs: true,
-//       js: true,
-//       vuejs: true,
-//       // postedAt: new Date()
-//   },
-//   {
-//     // id 2
-//     title: "Fullstack Developer",
-//     content: "apa saja yang penting kerja",
-//     images: "images/c.jpg",
-//     startDate: "2023-08-01",
-//     endDate: "2024-12-01",
-//     duration: "1 bulan",
-//     nodejs: false,
-//     reactjs: false,
-//     js: true,
-//     vuejs: true,
-//     // postedAt: new Date()
-//   },
-// ];
+app.use(session({
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 2
+  },
+  store: new session.MemoryStore(),
+  saveUninitialized: true,
+  resave: false,
+  secret: 'secretValue'
+}))
 
 // routing
 app.get("/", home);
@@ -103,82 +55,45 @@ app.post("/blog", addBlog);
 app.post("/update-blog/:id", updateBlog);
 app.get("/edit-blog/:id", editBlog);
 app.get("/delete-blog/:id", deleteBlog);
-
-// login dan register user
 app.get("/register", formRegister)
 app.get("/login", formLogin)
-
-// update login dan register user
 app.post("/register", newUser)
-
+app.post("/login", userLogin)
+app.get("/logout", (req, res) => {
+  req.session.destroy()
+  res.redirect("/")
+} ) 
 
 // local server
 app.listen(PORT, () => {
   console.log("Server running on port ${PORT}");
 });
 
-//  blog
-function blog(req, res) {
-  res.render("blog");
+
+//  home
+async function home(req, res) {
+  try{
+    const query= `SELECT "Projects".*, "users".id AS author_id, "users".name AS author_name FROM "Projects" LEFT JOIN "users" ON "Projects".author = "users".id` 
+        let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
+
+        let dataBlogRes = obj.map((item) => {
+          return {
+            ...item,
+            startDate: moment(item.startDate).format("DD-MMM-YYYY"),
+            endDate: moment(item.endDate).format("DD-MMM-YYYY"),
+            duration: dateDuration(item.startDate, item.endDate),
+            isLogin: req.session.isLogin,
+            user: req.session.user,
+          };
+        });
+
+        res.render('index', {dataBlog: dataBlogRes, isLogin: req.session.isLogin, user: req.session.user,}) 
+  }catch(error){
+    console.log(error)
+  }
 }
 
-// add new blog
-// function addBlog(req, res) {
-//   const  {
-//     title,
-//     content,
-//     images,
-//     startDate,
-//     endDate,
-//     nodejs,
-//     reactjs,
-//     js,
-//     vuejs,
-//     // postedAt,
-//   } = req.body;
-
-//   let start = new Date(startDate);
-//   let end = new Date(endDate)
-
-//   if (start > end) {
-//     return res.send("You Fill End Date Before Start Date");
-//   }
-
-//   let difference = end.getTime() - start.getTime();
-//   let days = difference / (1000 * 3600 * 24);
-//   let weeks = Math.floor(days / 7);
-//   let months = Math.floor(weeks / 4);
-//   let Yeat = Math.floor(months / 12);
-//   let duration = "";
-
-//   if (years > 0){
-//     duration = years + " Tahun";
-//   } else if (months > 0) {
-//     duration = months + " Bulan";
-//   } else if (weeks > 0) {
-//     duration = weeks + " Minggu";
-//   }else if (days > 0) {
-//     duration = days + " Hari";
-//   }
-  
-//   const data = {
-//     title,
-//     content,
-//     images,
-//     startDate,
-//     endDate,
-//     duration,
-//     nodejs,
-//     reactjs,
-//     js,
-//     vuejs,
-//   };
-
-//   dataBlog.push(data)
-//   res.redirect("/")
-
-// }
-
+//  blog
 async function addBlog(req, res) {
 	try {
 		const { author, title, content, images, startDate, endDate, nodejs, reactjs, js, vuejs } =
@@ -196,28 +111,39 @@ async function addBlog(req, res) {
 	}
 }
 
-async function home(req, res) {
-  try{
-    const query= `select id, title, content, images, "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt"
-	FROM public."Projects";`
+// editBlog
+async function editBlog(req, res) {
+	const { id } = req.params;
+	try {
+    const query = `SELECT * FROM "Projects" WHERE id=${id};`;
+		let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-        let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
-
-        let dataBlogRes = obj.map((item) => {
-          return {
-            ...item,
-            startDate: moment(item.startDate).format("DD-MMM-YYYY"),
-            endDate: moment(item.endDate).format("DD-MMM-YYYY"),
-            duration: dateDuration(item.startDate, item.endDate),
-          };
-        });
-
-        res.render('index', {dataBlog: dataBlogRes}) 
-  }catch(error){
-    console.log(error)
-  }
+		obj = obj.map((item) => {
+			return {
+				...item,
+    
+				startDate: moment(item.startDate).format("YYYY-MM-DD"),
+				endDate: moment(item.endDate).format("YYYY-MM-DD"),
+			};
+		});
+		res.render("edit-blog", { blog: obj[0] });
+	} catch (error) {
+		console.log(error);
+	}
 }
 
+// delete card photo blog
+async function deleteBlog(req, res) {
+	const { id } = req.params;
+	try {
+		await sequelize.query(`DELETE FROM "Projects" WHERE id=${id}`);
+		res.redirect("/");
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+// update-blog
 async function updateBlog(req, res) {
 	try {
 		const { id } = req.params;
@@ -248,11 +174,14 @@ async function updateBlog(req, res) {
 	}
 }
 
+function blog(req, res ) {
+  res.render("blog")
+}
 
 // blog detail
 function blogDetail(req, res) {
     const { id } = req.params;
-    res.render("blog-detail", { blog: dataBlog[id] })
+    res.render("blog-detail", { blog: blogDetail[id] })
 }
 
 // contact
@@ -260,68 +189,6 @@ function contact(req, res) {
   res.render("contact")
 }
 
-// delete card photo blog
-async function deleteBlog(req, res) {
-	const { id } = req.params;
-	try {
-		await sequelize.query(`DELETE FROM "Projects" WHERE id=${id}`);
-		res.redirect("/");
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-
-// 
-async function editBlog(req, res) {
-	const { id } = req.params;
-	try {
-		const query = `SELECT * FROM "Projects" WHERE id=${id};`;
-		let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
-		// console.log(obj);
-
-		obj = obj.map((item) => {
-			return {
-				...item,
-				startDate: moment(item.startDate).format("YYYY-MM-DD"),
-				endDate: moment(item.endDate).format("YYYY-MM-DD"),
-			};
-		});
-		res.render("edit-blog", { blog: obj[0] });
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-// async function addUser(req, res) {
-//   try {
-//     const { email, password } = req.body
-//     const query = `SELECT * FROM users WHERE email = '${email}'`
-//     let obj = await sequelize.query(query, { type: QueryTypes.SELECT })
-
-//     console.log(obj)
-
-//     // checking if email has not been registered
-//     if(!obj.length) {
-//       req.flash('danger', "user has not been registered")
-//       return res.redirect('/login')
-//     }
-
-//     await bcrypt.compare(password, obj[0].password, (err, result) => {
-//       if(!result) {
-//         req.flash('danger', 'password wrong')
-//         return res.redirect('/login')
-//       } else {
-//         req.session.isLogin = true
-//         req.session.user = obj[0].name
-//         req.flash('success', 'login success')
-//         res.redirect('/')
-//       }
-//     })
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 function formRegister(req, res) {
   res.render('register')
@@ -330,6 +197,9 @@ function formRegister(req, res) {
 function formLogin(req, res) {
   res.render('login')
 }
+// function formLogin(req, res) {
+//   res.render('login')
+// }
 
 async function newUser(req, res) {
     try {
@@ -349,3 +219,34 @@ async function newUser(req, res) {
     console.log(error)
     }
 }
+
+
+async function userLogin(req, res) {
+  try {
+    const { email, password } = req.body
+    const query = `SELECT * FROM users WHERE email = '${email}'`
+    let obj = await sequelize.query(query, { type: QueryTypes.SELECT})
+
+    console.log(obj)
+
+    if(!obj.length) {
+      req.flash('danger', "Silahkan Registrasi Terlebih Dahulu")
+      return res.redirect('/login')
+    }
+    
+    await bcrypt.compare(password, obj[0].password, (err, result) => {
+      if(!result) {
+        req.flash('danger', 'Password Salah')
+        return res.redirect('/login')
+      }else {
+        req.session.isLogin = true
+        req.session.user = obj[0].name
+        req.session.idUser = obj[0].id
+        req.flash('success', 'Berhasil Masuk')
+        res.redirect('/')
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+} 
