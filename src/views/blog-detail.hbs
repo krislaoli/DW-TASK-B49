@@ -21,7 +21,7 @@
   </head>
   <body>
     <!-- navbar-content -->
-    <nav class="navbar navbar-expand-lg" style="background-color: orangered;">
+    <nav class="navbar navbar-expand-lg" style="background-image: url('https://i.pinimg.com/originals/3f/fe/5d/3ffe5ddb67ae12e1103e84e77f78a0db.jpg');">
       <div class="container">
         <a class="navbar-brand" href="#"><img
             src="/images/uchiha.PNG"
@@ -35,11 +35,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link" aria-current="page" href="/">Home</a>
+              <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
             </li>
 
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="/blog">
+              <a class="nav-link active text-white" href="/blog">
                 Add Project
               </a>
             </li>
@@ -47,8 +47,8 @@
           </ul>
           <div class="d-flex">
             <a
-              class="btn fw-bold text-white rounded-pill "
-              style="background-color: black;"
+              class="btn fw-bold text-black rounded-pill "
+              style="background-color: yellow;"
               type="submit"
               href="/contact"
             >Contact Me</a>
@@ -63,28 +63,32 @@
             <h2 class="text-center fw-bold fs-1">{{blog.title}}</h2>
             <div class="container">
                 <div class="row justify-content-between m-5">
-                    <div class="col-sm-6">
-                        <img src="/{{blog.images}}" alt="project-1">
+                    <div class="col-sm-5 ">
+                        <img src="/{{blog.images}}" alt="project-1" style="height: 450px;">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <h4 class="fw-bold fs-3">Duration</h4>
-                        <p><i class="fa-regular fa-calendar-days"></i> 20 September 2023 - 24 Agustus 2023</p>
-                        <p><i class="fa-regular fa-clock"></i> 1 Moth</p>
+                        <p><i class="fa-regular fa-calendar-days"></i> {{blog.startDate}} <==> {{blog.endDate}}</p>
+                        <p><i class="fa-regular fa-clock"></i> {{blog.duration}}</p>
+                        <p class="card-duration mt-3 fw-bold"  style="font-size: 14px;">{{blog.author_name}}</p>
                         <h4 class="fw-bold fs-3">Technologies</h4>
-                        <div class="gap-5 fs-5 mb-3" style="display: flex;">
-                          <a><i class="fa-brands fa-js"></i> JavaScript</a>
-                          <a><i class="fa-brands fa-react"></i> React Js</a>
+                      <div class="gap-5 fs-3 mb-3">
+                          {{#if blog.nodejs}}
+                            <a><i class="fa-brands fa-node-js"></i></a>
+                          {{/if}}
+                          {{#if blog.reactjs}}
+                            <a><i class="fa-brands fa-react"></i></a>
+                          {{/if}}
+                          {{#if blog.js}}
+                            <a><i class="fa-brands fa-js"></i></a>
+                          {{/if}}
+                          {{#if blog.vuejs}}
+                            <a><i class="fa-brands fa-vuejs"></i></a>
+                          {{/if}}
                         </div>
-                        <div class="gap-5 fs-5 mb-3" style="display: flex;"> 
-                          <a><i class="fa-brands fa-vuejs"></i> Vue Js</a>
-                          <a style="margin-left: 35px;"><i class="fa-brands fa-node"></i> Node Js</a>
-                        </div>
+                        <p style="text-align: justify; " ><h4 class="fw-bold fs-3">Description</h4>{{blog.content}}
+                           </p>
                     </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <p style="text-align: justify;" >{{blog.content}} </p>
-                  </div>
                 </div>
             </div>
         </div>

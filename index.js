@@ -103,15 +103,16 @@ async function home(req, res) {
 //  blog
 async function addBlog(req, res) {
 	try {
-		const { author, title, content, startDate, endDate, nodejs, reactjs, js, vuejs } =
+		const { title, content, startDate, endDate, nodejs, reactjs, js, vuejs } =
 			req.body;
 		const images = req.file.filename;
-    // const author = req.session.idUser
+    const author = req.session.idUser
 		const nodejsCheck = nodejs ? true : false;
 		const reactjsCheck = reactjs ? true : false;
 		const jsCheck = js ? true : false;
 		const vuejsCheck = vuejs ? true : false;
-    console.log("req.file", req.body.file, req.file.filename) 
+    // console.log("req.file", req.body.file, req.file.filename) 
+    
     
 		await sequelize.query(`INSERT INTO "Projects"(title, content, images, author,  "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
 	VALUES ('${title}', '${content}', '${images}', '${author}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
@@ -156,7 +157,8 @@ async function deleteBlog(req, res) {
 async function updateBlog(req, res) {
 	try {
 		const { id } = req.params;
-		const {title, images, content, startDate, endDate, nodejs, reactjs, js, vuejs } = req.body;
+		const {title, content, startDate, endDate, nodejs, reactjs, js, vuejs } = req.body;
+    const images = req.file.filename;
 		const nodejsCheck = nodejs ? true : false;
 		const reactjsCheck = reactjs ? true : false;
 		const jsCheck = js ? true : false;
@@ -197,12 +199,13 @@ async function blogDetail(req, res) {
 		obj = obj.map((item) => {
 			return {
 				...item,
-				startDate: moment(item.startDate).format("YYYY-MM-DD"),
-				endDate: moment(item.endDate).format("YYYY-MM-DD"),
+				startDate: moment(item.startDate).format("DD-MMM-YYYY"),
+				endDate: moment(item.endDate).format("DD-MMM-YYYY"),
+        duration: dateDuration(item.startDate, item.endDate)
 			};
 		});
-    console.log(obj)
-		res.render("blog-detail", { blog: blogDetail[0] });
+    console.log()
+		res.render("blog-detail", { blog: obj[0] });
 	} catch (error) {
 		console.log(error);
 	}

@@ -19,9 +19,9 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body>
+  <body style="background-image: url('https://images2.alphacoders.com/242/2420.png');">
     <!-- navbar-content -->
-    <nav class="navbar navbar-expand-lg" style="background-color: orangered;">
+    <nav class="navbar navbar-expand-lg" style="background-color: orangered; background-image: url('https://i.pinimg.com/originals/3f/fe/5d/3ffe5ddb67ae12e1103e84e77f78a0db.jpg');">
       <div class="container">
         <a class="navbar-brand" href="#"><img
             src="/images/uchiha.PNG"
@@ -35,31 +35,32 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
             </li>
-
+            {{#if isLogin}}
             <li class="nav-item fw-bold ms-3">
-              <a class="nav-link active" href="/blog">
+              <a class="nav-link active text-white" href="/blog">
                 Add Project
               </a>
             </li>
+            {{/if}}
           </ul>
           <div class="d-flex">
               <ul class="navbar-nav me-auto mb-4 ms-5 mb-lg-0 fw-bold">
                 <li class="nav-item">
-                    <a class="nav-link mx-auto" style="width: 90px;" href="/register">
+                    <a class="nav-link mx-auto text-white" style="width: 90px;" href="/register">
                         Register
                     </a>
                 </li>
                 <li class="nav-item fw-bold ms-3">
-                    <a class="nav-link active" style="width: 100px;" href="/login">
+                    <a class="nav-link text-white active" style="width: 100px;" href="/login">
                         Login
                     </a>
                 </li>
               </ul>
             <a
-              class="btn fw-bold text-white rounded-pill "
-              style="background-color: black;"
+              class="btn fw-bold text-black rounded-pill "
+              style="background-color: yellow;"
               type="submit"
               href="/contact"
               >Contact Me
@@ -77,23 +78,23 @@
       </div>
     {{/if}} --}}
  
-        <div class="container d-flex justify-content-center" >
+        <div class="container d-flex justify-content-center">
           <div class="w-50">
             <h3 class="text-center mt-5">REGISTER</h3>
             <form action="/register" method="POST">
               <div class="mb-3">
-                <label for="username" class="form-label">Name</label>
+                <label for="username" class="form-label fw-bold">Name</label>
                 <input type="text" name="name" class="form-control" id="username" aria-describedby="emailHelp" />
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
+                <label for="email" class="form-label fw-bold">Email</label>
                 <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="fw-bold form-label">Password</label>
                 <input type="password" class="form-control" name="password" id="password" />
               </div>
-              <button type="submit" class="btn btn-dark mt-3 px-5 rounded-pill">Submit</button>
+              <button type="submit" class="btn btn-dark mt-3 px-5 rounded-pill ">Submit</button>
             </form>
           </div>
     </div>

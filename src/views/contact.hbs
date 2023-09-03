@@ -14,7 +14,7 @@
   <body>
 
     <!-- navbar section -->
-    <nav class="navbar navbar-expand-lg" style="background-color: orangered;">
+    <nav class="navbar navbar-expand-lg" style=" background-image: url('https://i.pinimg.com/originals/3f/fe/5d/3ffe5ddb67ae12e1103e84e77f78a0db.jpg');">
       <div class="container">
         <a class="navbar-brand" href="#"><img
             src="/images/uchiha.PNG"
@@ -28,32 +28,34 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item fw-bold ms-3">
               <a
-                class="nav-link active"
+                class="nav-link active text-white"
                 aria-current="page"
                 href="/"
               >Home</a>
             </li>
 
+            {{#if isLogin}}
             <li class="nav-item fw-bold ms-3">
               <a class="nav-link active" href="/blog"> Add Project </a>
             </li>
+            {{/if}}
           </ul>
           <!-- button contact -->
           <div class="d-flex justify-content-end">
             <ul class="navbar-nav me-auto mb-2 ms-5 mb-lg-0">
                   <li class="nav-item fw-bold ms-3">
-                    <a class="nav-link active" style="width: 90px;" href="/register">
+                    <a class="nav-link active text-white" style="width: 90px;" href="/register">
                         Register
                     </a>
                   </li>
                   <li class="nav-item fw-bold ms-3">
-                    <a class="nav-link active" style="width: 90px;" href="/login">
+                    <a class="nav-link active text-white" style="width: 90px;" href="/login">
                         Login
                     </a>
                   </li>
                   <a
-                    class="btn fw-bold text-white rounded-pill"
-                    style="background-color: black;"
+                    class="btn fw-bold rounded-pill text-black"
+                    style="background-color: yellow;"
                     type="submit"
                     href="/contact"
                   >Contact Me</a>
@@ -65,7 +67,7 @@
 
 
     <!-- form content -->
-<section style="background-color:thistle;">
+<section style="background-color:thistle; background-image: url('https://images2.alphacoders.com/242/2420.png');">
       <div class="container p-4" style="width: 100%; background-color:">
         <div class="row justify-content-center">
           <div class="col-sm-4 text-start m-3">
