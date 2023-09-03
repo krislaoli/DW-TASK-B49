@@ -13,4 +13,4 @@ const upload = multer({
     storage: store
 })
 
-module.exports = upload
+module.exports = upload;

@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('express-flash');                                              
 // const { start } = require("repl");
-// const upload = require
+const upload = require('./src/middlewares/uploadFiles')
 
 const config = require('./src/config/config.json')
 const {Sequelize, QueryTypes} = require('sequelize');
@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // set serving static file
 app.use(express.static('src/assets'))
+app.use(express.static('src/uploads'))
 
 // parsing data from client
 app.use(express.urlencoded({ extended: false }))
@@ -43,19 +44,19 @@ app.use(session({
   store: new session.MemoryStore(),
   saveUninitialized: true,
   resave: false,
-  secret: 'secretValue'
+  secret: "secretValue",
 }))
 
 // routing
 app.get("/", home);
 app.get("/blog", blog);
-app.post("/blog", addBlog);
-// app.post("/blog", upload.single("upload-image"), addBlog);
+// app.post("/blog", addBlog);
+app.post("/blog", upload.single("images"), addBlog);
 
 app.get("/blog-detail/:id", blogDetail);
 app.get("/contact", contact);
-app.post("/update-blog/:id", updateBlog);
-// app.post("/update-blog/:id", upload.single("upload-image"), updateBlog);
+// app.post("/update-blog/:id", updateBlog);
+app.post("/update-blog/:id", upload.single("images"), updateBlog);
 
 app.get("/edit-blog/:id", editBlog);
 app.get("/delete-blog/:id", deleteBlog);
@@ -102,16 +103,18 @@ async function home(req, res) {
 //  blog
 async function addBlog(req, res) {
 	try {
-		const { author, title, content, images, startDate, endDate, nodejs, reactjs, js, vuejs } =
+		const { author, title, content, startDate, endDate, nodejs, reactjs, js, vuejs } =
 			req.body;
-		// const images = "image.png";
+		const images = req.file.filename;
     // const author = req.session.idUser
 		const nodejsCheck = nodejs ? true : false;
 		const reactjsCheck = reactjs ? true : false;
 		const jsCheck = js ? true : false;
 		const vuejsCheck = vuejs ? true : false;
-		await sequelize.query(`INSERT INTO "Projects"(title, content, images, author, "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
-	VALUES ('${title}', '${content}', '${images}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
+    console.log("req.file", req.body.file, req.file.filename) 
+    
+		await sequelize.query(`INSERT INTO "Projects"(title, content, images, author,  "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
+	VALUES ('${title}', '${content}', '${images}', '${author}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
 		res.redirect("/");
 	} catch (error) {
 		console.log(error);
@@ -128,7 +131,6 @@ async function editBlog(req, res) {
 		obj = obj.map((item) => {
 			return {
 				...item,
-    
 				startDate: moment(item.startDate).format("YYYY-MM-DD"),
 				endDate: moment(item.endDate).format("YYYY-MM-DD"),
 			};
@@ -186,9 +188,24 @@ function blog(req, res ) {
 }
 
 // blog detail
-function blogDetail(req, res) {
+async function blogDetail(req, res) {
+  try {
     const { id } = req.params;
-    res.render("blog-detail", { blog: blogDetail[id] })
+    const query = `SELECT * FROM "Projects" WHERE id=${id};`;
+		let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+		obj = obj.map((item) => {
+			return {
+				...item,
+				startDate: moment(item.startDate).format("YYYY-MM-DD"),
+				endDate: moment(item.endDate).format("YYYY-MM-DD"),
+			};
+		});
+    console.log(obj)
+		res.render("blog-detail", { blog: blogDetail[0] });
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 // contact
