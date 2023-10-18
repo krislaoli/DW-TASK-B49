@@ -1,23 +1,22 @@
 const express = require("express");
 const app = express();
 const PORT = 5000;
-const path = require("path");               
-const dateDuration = require('./src/helper/duration')
-const moment = require('moment')
-const bcrypt = require('bcrypt');
-const session = require('express-session');
-const flash = require('express-flash');                                              
-// const { start } = require("repl");
-const upload = require('./src/middlewares/uploadFiles')
+const path = require("path");
+const dateDuration = require("./src/helper/duration");
+const moment = require("moment");
+const bcrypt = require("bcrypt");
+const session = require("express-session");
+const flash = require("express-flash");
+const upload = require("./src/middlewares/uploadFiles");
 
-const config = require('./src/config/config.json')
-const {Sequelize, QueryTypes} = require('sequelize');
+const config = require("./src/config/config.json");
+const { Sequelize, QueryTypes } = require("sequelize");
 const { error } = require("console");
-const sequelize = new Sequelize(config.development)
+const sequelize = new Sequelize(config.development);
 
 // set up call hbs untuk sub folder
-app.set("view engine","hbs");
-app.set("views",path.join(__dirname, "src/views"));
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "src/views"));
 
 // set serving static file berupa file yang akan di tampilin untuk image dan js yang diambil dari file assets
 app.use(express.static(path.join(__dirname, "src/assets")));
@@ -25,145 +24,161 @@ app.use(express.static(path.join(__dirname, "src/assets")));
 // parsing data from client
 app.use(express.urlencoded({ extended: false }));
 
+// styling css
+app.use(express.static("public"));
+
 // set serving static file
-app.use(express.static('src/assets'))
-app.use(express.static('src/uploads'))
+app.use(express.static("src/assets"));
+app.use(express.static("src/uploads"));
 
 // parsing data from client
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 
 // setup flash
-app.use(flash())
+app.use(flash());
 
-app.use(session({
-  cookie: {
-    httpOnly: true,
-    secure: false,
-    maxAge: 1000 * 60 * 60 * 2
-  },
-  store: new session.MemoryStore(),
-  saveUninitialized: true,
-  resave: false,
-  secret: "secretValue",
-}))
+app.use(
+  session({
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 2,
+    },
+    store: new session.MemoryStore(),
+    saveUninitialized: true,
+    resave: false,
+    secret: "secretValue",
+  })
+);
 
 // routing
 app.get("/", home);
 app.get("/blog", blog);
-// app.post("/blog", addBlog);
 app.post("/blog", upload.single("images"), addBlog);
-
 app.get("/blog-detail/:id", blogDetail);
 app.get("/contact", contact);
-// app.post("/update-blog/:id", updateBlog);
 app.post("/update-blog/:id", upload.single("images"), updateBlog);
-
 app.get("/edit-blog/:id", editBlog);
 app.get("/delete-blog/:id", deleteBlog);
-app.get("/register", formRegister)
-app.get("/login", formLogin)
-app.post("/register", newUser)
-app.post("/login", userLogin)
+app.get("/register", formRegister);
+app.get("/login", formLogin);
+app.post("/register", newUser);
+app.post("/login", userLogin);
 
+// logout user
 app.get("/logout", (req, res) => {
-  req.session.destroy()
-  res.redirect("/")
-} ) 
+  req.session.destroy();
+  res.redirect("/");
+});
 
 // local server
 app.listen(PORT, () => {
   console.log("Server running on port ${PORT}");
 });
 
-
-//  home
+//  index-hbs
 async function home(req, res) {
-  try{
-    const query= `SELECT "Projects".*, "users".id AS author_id, "users".name AS author_name FROM "Projects" LEFT JOIN "users" ON "Projects".author = "users".id` 
-        let obj = await sequelize.query(query, {type: QueryTypes.SELECT})
+  try {
+    const query = `SELECT "Projects".*, "users".id AS author_id, "users".name AS author_name FROM "Projects" LEFT JOIN "users" ON "Projects".author = "users".id`;
+    let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-        let dataBlogRes = obj.map((item) => {
-          return {
-            ...item,
-            startDate: moment(item.startDate).format("DD-MMM-YYYY"),
-            endDate: moment(item.endDate).format("DD-MMM-YYYY"),
-            duration: dateDuration(item.startDate, item.endDate),
-            isLogin: req.session.isLogin,
-            user: req.session.user,
-            // idUser: req.session
-          };
-        });
+    let dataBlogRes = obj.map((item) => {
+      return {
+        ...item,
+        startDate: moment(item.startDate).format("DD-MMM-YYYY"),
+        endDate: moment(item.endDate).format("DD-MMM-YYYY"),
+        duration: dateDuration(item.startDate, item.endDate),
+        isLogin: req.session.isLogin,
+        user: req.session.user,
+        // idUser: req.session
+      };
+    });
 
-        res.render('index', {dataBlog: dataBlogRes, isLogin: req.session.isLogin, user: req.session.user,}) 
-  }catch(error){
-    console.log(error)
+    res.render("index", {
+      dataBlog: dataBlogRes,
+      isLogin: req.session.isLogin,
+      user: req.session.user,
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
 
-//  blog
+//  blog-hbs
 async function addBlog(req, res) {
-	try {
-		const { title, content, startDate, endDate, nodejs, reactjs, js, vuejs } =
-			req.body;
-		const images = req.file.filename;
-    const author = req.session.idUser
-		const nodejsCheck = nodejs ? true : false;
-		const reactjsCheck = reactjs ? true : false;
-		const jsCheck = js ? true : false;
-		const vuejsCheck = vuejs ? true : false;
-    // console.log("req.file", req.body.file, req.file.filename) 
-    
-    
-		await sequelize.query(`INSERT INTO "Projects"(title, content, images, author,  "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
+  try {
+    const { title, content, startDate, endDate, nodejs, reactjs, js, vuejs } =
+      req.body;
+    const images = req.file.filename;
+    const author = req.session.idUser;
+    const nodejsCheck = nodejs ? true : false;
+    const reactjsCheck = reactjs ? true : false;
+    const jsCheck = js ? true : false;
+    const vuejsCheck = vuejs ? true : false;
+    // console.log("req.file", req.body.file, req.file.filename)
+
+    await sequelize.query(`INSERT INTO "Projects"(title, content, images, author,  "startDate", "endDate", nodejs, reactjs, js, vuejs, "createdAt", "updatedAt")
 	VALUES ('${title}', '${content}', '${images}', '${author}', '${startDate}', '${endDate}', '${nodejsCheck}', '${reactjsCheck}', '${jsCheck}', '${vuejsCheck}', NOW(), NOW());`);
-		res.redirect("/");
-	} catch (error) {
-		console.log(error);
-	}
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-// editBlog
+// edit-blog-hbs
 async function editBlog(req, res) {
-	const { id } = req.params;
-	try {
+  const { id } = req.params;
+  try {
     const query = `SELECT * FROM "Projects" WHERE id=${id};`;
-		let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
+    let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-		obj = obj.map((item) => {
-			return {
-				...item,
-				startDate: moment(item.startDate).format("YYYY-MM-DD"),
-				endDate: moment(item.endDate).format("YYYY-MM-DD"),
-			};
-		});
-		res.render("edit-blog", { blog: obj[0] });
-	} catch (error) {
-		console.log(error);
-	}
+    obj = obj.map((item) => {
+      return {
+        ...item,
+        startDate: moment(item.startDate).format("YYYY-MM-DD"),
+        endDate: moment(item.endDate).format("YYYY-MM-DD"),
+      };
+    });
+    res.render("edit-blog", { blog: obj[0] });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-// delete card photo blog
-async function deleteBlog(req, res) {
-	const { id } = req.params;
-	try {
-		await sequelize.query(`DELETE FROM "Projects" WHERE id=${id}`);
-		res.redirect("/");
-	} catch (error) {
-		console.log(error);
-	}
+// blog-detail-hbs
+async function blogDetail(req, res) {
+  try {
+    const { id } = req.params;
+    const query = `SELECT * FROM "Projects" WHERE id=${id};`;
+    let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+    obj = obj.map((item) => {
+      return {
+        ...item,
+        startDate: moment(item.startDate).format("DD-MMM-YYYY"),
+        endDate: moment(item.endDate).format("DD-MMM-YYYY"),
+        duration: dateDuration(item.startDate, item.endDate),
+      };
+    });
+    console.log();
+    res.render("blog-detail", { blog: obj[0] });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // update-blog
 async function updateBlog(req, res) {
-	try {
-		const { id } = req.params;
-		const {title, content, startDate, endDate, nodejs, reactjs, js, vuejs } = req.body;
+  try {
+    const { id } = req.params;
+    const { title, content, startDate, endDate, nodejs, reactjs, js, vuejs } =
+      req.body;
     const images = req.file.filename;
-		const nodejsCheck = nodejs ? true : false;
-		const reactjsCheck = reactjs ? true : false;
-		const jsCheck = js ? true : false;
-		const vuejsCheck = vuejs ? true : false;
-		await sequelize.query(`UPDATE "Projects" 
+    const nodejsCheck = nodejs ? true : false;
+    const reactjsCheck = reactjs ? true : false;
+    const jsCheck = js ? true : false;
+    const vuejsCheck = vuejs ? true : false;
+    await sequelize.query(`UPDATE "Projects" 
         SET 
             title = '${title}', 
             images = '${images}', 
@@ -178,102 +193,90 @@ async function updateBlog(req, res) {
             "updatedAt" = NOW() 
         WHERE 
             id = ${id}
-        ;`);
-		res.redirect("/");
-	} catch (error) {
-		console.log(error);
-	}
+            ;`);
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function blog(req, res ) {
-  res.render("blog")
-}
-
-// blog detail
-async function blogDetail(req, res) {
+// delete card photo blog
+async function deleteBlog(req, res) {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const query = `SELECT * FROM "Projects" WHERE id=${id};`;
-		let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
-
-		obj = obj.map((item) => {
-			return {
-				...item,
-				startDate: moment(item.startDate).format("DD-MMM-YYYY"),
-				endDate: moment(item.endDate).format("DD-MMM-YYYY"),
-        duration: dateDuration(item.startDate, item.endDate)
-			};
-		});
-    console.log()
-		res.render("blog-detail", { blog: obj[0] });
-	} catch (error) {
-		console.log(error);
-	}
+    await sequelize.query(`DELETE FROM "Projects" WHERE id=${id}`);
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-// contact
+// contact-hbs
 function contact(req, res) {
-  res.render("contact")
+  res.render("contact");
 }
 
-
+// form register
 function formRegister(req, res) {
-  res.render('register')
+  res.render("register");
 }
 
+// form login
 function formLogin(req, res) {
-  res.render('login')
+  res.render("login");
 }
-// function formLogin(req, res) {
-//   res.render('login')
-// }
 
+// blog-hbs
+function blog(req, res) {
+  res.render("blog");
+}
+
+// new user
 async function newUser(req, res) {
-    try {
-    const { name, email, password } = req.body
-    const salt = 10
+  try {
+    const { name, email, password } = req.body;
+    const salt = 10;
 
     // const obj = await bcrypt.hash(password, salt)
     await bcrypt.hash(password, salt, (err, hashPassword) => {
       const query = `INSERT INTO users (name, email, password, "createdAt", 
-      "updatedAt") VALUES ('${name}', '${email}', '${hashPassword}', NOW(), NOW())`
-      
+      "updatedAt") VALUES ('${name}', '${email}', '${hashPassword}', NOW(), NOW())`;
 
-      sequelize.query(query)
-      res.redirect('login')
-    })
-    } catch (error) {
-    console.log(error)
-    }
+      sequelize.query(query);
+      res.redirect("login");
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-
+// user login
 async function userLogin(req, res) {
   try {
-    const { email, password } = req.body
-    const query = `SELECT * FROM users WHERE email = '${email}'`
-    let obj = await sequelize.query(query, { type: QueryTypes.SELECT})
+    const { email, password } = req.body;
+    const query = `SELECT * FROM users WHERE email = '${email}'`;
+    let obj = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-    console.log(obj)
+    console.log(obj);
 
-    if(!obj.length) {
-      req.flash('danger', "Silahkan Registrasi Terlebih Dahulu")
-      return res.redirect('/login')
+    if (!obj.length) {
+      req.flash("danger", "Silahkan Registrasi Terlebih Dahulu");
+      return res.redirect("/login");
     }
-    
+
     await bcrypt.compare(password, obj[0].password, (err, result) => {
-      if(!result) {
-        req.flash('danger', 'Password Salah')
-        return res.redirect('/login')
-      }else {
-        req.session.isLogin = true
-        req.session.user = obj[0].name
-        req.session.idUser = obj[0].id
-        req.flash('success', 'Berhasil Masuk')
-        res.redirect('/')
+      if (!result) {
+        req.flash("danger", "Password Salah");
+        return res.redirect("/login");
+      } else {
+        req.session.isLogin = true;
+        req.session.user = obj[0].name;
+        req.session.idUser = obj[0].id;
+        req.flash("success", "Berhasil Masuk");
+        res.redirect("/");
       }
-    })
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-} 
+}
